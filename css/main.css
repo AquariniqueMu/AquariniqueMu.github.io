@@ -181,7 +181,7 @@ body {
   background: var(--body-bg-color);
   color: var(--text-color);
   font-family: 'Lato', "Verdana", "Microsoft YaHei", sans-serif;
-  font-size: 0.9em;
+  font-size: 1.2em;
   line-height: 2;
 }
 @media (max-width: 991px) {
@@ -1171,7 +1171,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff9024;
+  background: #53f9ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
