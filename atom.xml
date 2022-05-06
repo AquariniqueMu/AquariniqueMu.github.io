@@ -58,9 +58,9 @@
     <category term="学习资料" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
     
     
-    <category term="数据科学" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
-    
     <category term="技术学习" scheme="http://example.com/tags/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="数据科学" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
     
   </entry>
   
