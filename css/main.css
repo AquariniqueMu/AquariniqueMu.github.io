@@ -995,7 +995,7 @@ pre .javascript .function {
 }
 .site-subtitle {
   color: #ddd;
-  font-size: 1.7em;
+  font-size: 0.7em;
   margin: 10px 0;
 }
 .use-motion .brand {
@@ -1066,7 +1066,7 @@ pre .javascript .function {
 .menu-item span.exturl {
   border-bottom: 0;
   display: block;
-  font-size: 1.7em;
+  font-size: 0.7em;
   transition-property: border-color;
   transition-delay: 0s;
   transition-duration: 0.2s;
@@ -1153,7 +1153,7 @@ pre .javascript .function {
 }
 .site-description {
   color: #999;
-  font-size: 1.7em;
+  font-size: 0.7em;
   margin-top: 0;
   text-align: center;
 }
@@ -1164,14 +1164,14 @@ pre .javascript .function {
 .links-of-author span.exturl {
   border-bottom-color: #555;
   display: inline-block;
-  font-size: 1.7em;
+  font-size: 0.7em;
   margin-bottom: 10px;
   margin-right: 10px;
   vertical-align: middle;
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff44cd;
+  background: #faffa4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1208,7 +1208,7 @@ pre .javascript .function {
   color: #fff;
 }
 .links-of-blogroll {
-  font-size: 1.7em;
+  font-size: 0.7em;
   margin-top: 10px;
 }
 .links-of-blogroll-title {
@@ -1368,7 +1368,7 @@ pre .javascript .function {
 }
 .site-state-item-name {
   color: #999;
-  font-size: 1.7em;
+  font-size: 0.7em;
 }
 .footer {
   color: #999;
@@ -1639,7 +1639,7 @@ pre .javascript .function {
   left: 0;
   margin-left: -4px;
   position: absolute;
-  top: 0.6em;
+  top: 3.6em;
   transition-property: background;
   width: 6px;
   transition-delay: 0s;
@@ -1654,7 +1654,7 @@ pre .javascript .function {
 }
 .posts-collapse .post-meta {
   display: inline;
-  font-size: 0.6em;
+  font-size: 3.6em;
   margin-right: 10px;
 }
 .posts-collapse .post-title {
@@ -1822,7 +1822,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   color: #999;
   font-family: 'Lato', "Verdana", "Microsoft YaHei", sans-serif;
-  font-size: 0.6em;
+  font-size: 3.6em;
   margin: 3px 0 60px 0;
   text-align: center;
 }
@@ -1875,7 +1875,7 @@ pre .javascript .function {
   top: 2px;
 }
 .post-nav-item .fa {
-  font-size: 0.6em;
+  font-size: 3.6em;
 }
 .post-nav-item:first-child {
   margin-right: 15px;
@@ -1913,7 +1913,7 @@ pre .javascript .function {
 }
 .post-tags a {
   display: inline-block;
-  font-size: 1.7em;
+  font-size: 0.7em;
 }
 .post-tags a:not(:last-child) {
   margin-right: 10px;
@@ -2125,7 +2125,7 @@ pre .javascript .function {
   }
 }
 ul.breadcrumb {
-  font-size: 0.6em;
+  font-size: 3.6em;
   list-style: none;
   margin: 1em 0;
   padding: 0 2em;
