@@ -20,31 +20,28 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="陪家人前往临汾市洪洞县羊獬（Yo3 Hai1）村的唐尧故园，参观了一些古建，了解到一些羊獬村的历史和尧王传说，途中拍摄了一些复原古建筑的照片，感到比较值得记录。希望以后能收集更多地方的历史传说与影像。">
+  <meta name="description" content="在使用LaTeX的过程中遇到了两个问题，分别是标题左对齐和生成导航目录，通过查阅资料和多次调试终于获得了较为满意的结果，将过程和代码记录如下，以备之后查询。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="光影集：洪洞羊獬唐尧故园">
-<meta property="og:url" content="http://example.com/2022/04/17/%E5%85%89%E5%BD%B1%E9%9B%86%EF%BC%9A%E6%B4%AA%E6%B4%9E%E7%BE%8A%E7%8D%AC%E5%94%90%E5%B0%A7%E6%95%85%E5%9B%AD/index.html">
+<meta property="og:title" content="LaTeX标题居中与目录生成">
+<meta property="og:url" content="http://example.com/2022/05/09/LaTeX%E6%A0%87%E9%A2%98%E5%B1%85%E4%B8%AD%E4%B8%8E%E5%AF%BC%E8%88%AA%E7%9B%AE%E5%BD%95/index.html">
 <meta property="og:site_name" content="Wireless Thinking">
-<meta property="og:description" content="陪家人前往临汾市洪洞县羊獬（Yo3 Hai1）村的唐尧故园，参观了一些古建，了解到一些羊獬村的历史和尧王传说，途中拍摄了一些复原古建筑的照片，感到比较值得记录。希望以后能收集更多地方的历史传说与影像。">
+<meta property="og:description" content="在使用LaTeX的过程中遇到了两个问题，分别是标题左对齐和生成导航目录，通过查阅资料和多次调试终于获得了较为满意的结果，将过程和代码记录如下，以备之后查询。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/04/17/%E5%85%89%E5%BD%B1%E9%9B%86%EF%BC%9A%E6%B4%AA%E6%B4%9E%E7%BE%8A%E7%8D%AC%E5%94%90%E5%B0%A7%E6%95%85%E5%9B%AD/head.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/163685255-15c1cc6e-30c3-407f-bacb-6d6180ea3189.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/163685183-e2237ee2-641d-42fb-8e22-4d245319e26e.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/163685407-f95bad5e-2b29-46ff-b87b-b310de188cd6.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/163685412-4697600b-55f9-4325-86f9-c303eea69949.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/163685416-992a3aa5-7721-4bc4-8259-773013da5ded.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/163685404-62ddd05c-3b4f-4746-8bcd-b3a7386504b2.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/163685414-3712f63b-07da-4287-8508-ae533f33097c.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/163685408-0d50bf91-b574-4d43-b8b5-00dadffbf424.jpg">
-<meta property="article:published_time" content="2022-04-16T16:57:51.000Z">
-<meta property="article:modified_time" content="2022-05-06T19:18:59.430Z">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/167307140-8a1c9cb9-b9d8-4c3b-a557-13651e97e252.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/167307117-a2603a62-9d21-4a51-8d6a-adf18de58693.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/167307122-17d7769f-b719-4969-a89a-a603bbc69436.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/167307126-82ce90b0-9aa8-44b7-9af0-37d6fe8be249.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/167307132-4cddd228-f9ca-4ed9-b454-a29374be5b34.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/22231832/167307139-bbba178e-e0cd-49d7-9769-7085c3d155f2.png">
+<meta property="article:published_time" content="2022-05-08T17:17:42.000Z">
+<meta property="article:modified_time" content="2022-05-08T17:17:42.357Z">
 <meta property="article:author" content="J.W. Yang">
-<meta property="article:tag" content="摄影">
-<meta property="article:tag" content="地方志">
+<meta property="article:tag" content="技术学习">
+<meta property="article:tag" content="学术写作">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/04/17/%E5%85%89%E5%BD%B1%E9%9B%86%EF%BC%9A%E6%B4%AA%E6%B4%9E%E7%BE%8A%E7%8D%AC%E5%94%90%E5%B0%A7%E6%95%85%E5%9B%AD/head.jpg">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/22231832/167307140-8a1c9cb9-b9d8-4c3b-a557-13651e97e252.png">
 
-<link rel="canonical" href="http://example.com/2022/04/17/%E5%85%89%E5%BD%B1%E9%9B%86%EF%BC%9A%E6%B4%AA%E6%B4%9E%E7%BE%8A%E7%8D%AC%E5%94%90%E5%B0%A7%E6%95%85%E5%9B%AD/">
+<link rel="canonical" href="http://example.com/2022/05/09/LaTeX%E6%A0%87%E9%A2%98%E5%B1%85%E4%B8%AD%E4%B8%8E%E5%AF%BC%E8%88%AA%E7%9B%AE%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -57,7 +54,7 @@
   };
 </script>
 
-  <title>光影集：洪洞羊獬唐尧故园 | Wireless Thinking</title>
+  <title>LaTeX标题居中与目录生成 | Wireless Thinking</title>
   
 
 
@@ -206,7 +203,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/17/%E5%85%89%E5%BD%B1%E9%9B%86%EF%BC%9A%E6%B4%AA%E6%B4%9E%E7%BE%8A%E7%8D%AC%E5%94%90%E5%B0%A7%E6%95%85%E5%9B%AD/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/09/LaTeX%E6%A0%87%E9%A2%98%E5%B1%85%E4%B8%AD%E4%B8%8E%E5%AF%BC%E8%88%AA%E7%9B%AE%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/carol.png">
@@ -219,7 +216,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          光影集：洪洞羊獬唐尧故园
+          LaTeX标题居中与目录生成
         </h1>
 
         <div class="post-meta">
@@ -231,30 +228,20 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-04-17 00:57:51" itemprop="dateCreated datePublished" datetime="2022-04-17T00:57:51+08:00">2022-04-17</time>
+              <time title="创建时间：2022-05-09 01:17:42" itemprop="dateCreated datePublished" datetime="2022-05-09T01:17:42+08:00">2022-05-09</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-07 03:18:59" itemprop="dateModified" datetime="2022-05-07T03:18:59+08:00">2022-05-07</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%89%E5%BD%B1%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">光影集</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9C%B0%E6%96%B9%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">地方志</span></a>
+                  <a href="/categories/LaTeX%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">LaTeX学习笔记</span></a>
                 </span>
             </span>
 
           
+            <div class="post-description">在使用LaTeX的过程中遇到了两个问题，分别是标题左对齐和生成导航目录，通过查阅资料和多次调试终于获得了较为满意的结果，将过程和代码记录如下，以备之后查询。</div>
 
         </div>
       </header>
@@ -265,38 +252,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>陪家人前往临汾市洪洞县羊獬（Yo3 Hai1）村的唐尧故园，参观了一些古建，了解到一些羊獬村的历史和尧王传说，途中拍摄了一些复原古建筑的照片，感到比较值得记录。希望以后能收集更多地方的历史传说与影像。</strong></p>
-<img src="/2022/04/17/%E5%85%89%E5%BD%B1%E9%9B%86%EF%BC%9A%E6%B4%AA%E6%B4%9E%E7%BE%8A%E7%8D%AC%E5%94%90%E5%B0%A7%E6%95%85%E5%9B%AD/head.jpg" class>
+        <h1 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h1><p>在使用LaTeX编辑的过程中遇到了两个问题，记录如下：</p>
+<h2 id="标题对齐方式"><a href="#标题对齐方式" class="headerlink" title="标题对齐方式"></a>标题对齐方式</h2><p>在LaTeX的ctexart文本中，默认标题采用居中对齐的方式，如图所示。然而我个人比较偏向靠左对齐。</p>
+<img src="https://user-images.githubusercontent.com/22231832/167307140-8a1c9cb9-b9d8-4c3b-a557-13651e97e252.png" width="50%">
 
-<span id="more"></span>
+<h2 id="PDF目录生成"><a href="#PDF目录生成" class="headerlink" title="PDF目录生成"></a>PDF目录生成</h2><p>一般的生成目录指令只能在页面中生成目录，无法在pdf页面生成带链接的左侧导航目录。</p>
+<h1 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h1><h2 id="第一步：-leftline靠左"><a href="#第一步：-leftline靠左" class="headerlink" title="第一步：\leftline靠左"></a>第一步：\leftline靠左</h2><h3 id="1、指令代码"><a href="#1、指令代码" class="headerlink" title="1、指令代码"></a>1、指令代码</h3><p>起初，我采取了leftline指令，具体命令如下：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\section</span>&#123;<span class="keyword">\leftline</span>&#123;主要创新点&#125;&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="一、羊獬来历"><a href="#一、羊獬来历" class="headerlink" title="一、羊獬来历"></a>一、羊獬来历</h2><blockquote>
-<p>“阳城周府（洪洞古为阳城，隋时始改今名，参见《洪洞县志》）。有一老者特来献宝，言说该村有一牧童放羊，羊群里有一母羊生了一只独角羊。这羊毛青，四足，性忠目直，见斗则触不直，闻论则咋不正，可谓神羊。”</p>
-<p>于是尧王带着妻子女皇（散宜氏的女儿）和女儿娥皇一同前往周府视察。大臣皋陶看了言道：“此乃祥兽，可谓国宝，我听仙家赤将子舆讲过，从前黄帝时就曾出现过一次，名叫‘獬豸’这只兽只有在仁德如天的国君掌朝时才会出现，如今第二次出现正是圣君大德所感……同时在朝内也可识奸忠，辨邪正……”帝尧到生獬处视察不胜惊奇，只不过一席之地，四周绿荫如织，独于这一小块寸草不生，久鱼不湿，片雪不沾。正在帝尧视察之际，妻子分娩，生下了女儿女英。出生三天，女英浩齿如鲜，自言自语，又过两天开始行走。尧王惊喜若狂，周府宝气十足，于是将周府改名羊獬，又迁居羊獬。</p>
-<p>​																																															————<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BE%8A%E7%8D%AC%E6%9D%91/2981479">百度百科：羊獬村</a></p>
-</blockquote>
-<h2 id="二、三月三“接姑姑”"><a href="#二、三月三“接姑姑”" class="headerlink" title="二、三月三“接姑姑”"></a>二、三月三“接姑姑”</h2><p>羊獬村有三月三庙会的传统，起源于“接姑姑，迎娘娘”的民俗，也与尧舜和娥皇女英的故事有关。没有见到今年的庙会，只摘录相关文字如下：</p>
-<blockquote>
-<p>尧年老时，四处访贤，最后选定舜作自己的继承人，并将二女娥皇、女英嫁于舜为妻。舜生在洪洞诸冯（今圣王村），后躬耕于历山，为历山人。因此，羊獬人称娥皇、女英二位女神为“姑姑”，历山人则称为“娘娘”。娥皇、女英在世时，每年的农历三月三日，都要到羊獬住娘家，直到四月二十八日后才回婆家。由于娥皇、女英德高望重，且平易近人，谦和卑下，人民衷心爱戴，直到她俩死去，人民还是念念不忘。每年农历“三月初三”，羊獬人吹锣打鼓，金牌銮驾前往历山接姑姑回乡省亲，四月二十八日，历山人又往羊獬接娘娘回家事舜。</p>
-<p>这种民俗一直延续下来，传承至今近5000年，并于2008年被列入我国非物质文化遗产名录。</p>
-<p>​																																															————<a target="_blank" rel="noopener" href="https://www.linfen365.com/thread-403741-1-1.html">洪洞羊獬三月三“接姑姑”</a></p>
-</blockquote>
-<h2 id="三、光影留念"><a href="#三、光影留念" class="headerlink" title="三、光影留念"></a>三、光影留念</h2><img src="https://user-images.githubusercontent.com/22231832/163685255-15c1cc6e-30c3-407f-bacb-6d6180ea3189.jpg" width="70%" height="70%">
+<p>加入后成功实现了标题靠左对其效果：</p>
+<img src="https://user-images.githubusercontent.com/22231832/167307117-a2603a62-9d21-4a51-8d6a-adf18de58693.png" width="50%">
 
-<img src="https://user-images.githubusercontent.com/22231832/163685183-e2237ee2-641d-42fb-8e22-4d245319e26e.jpg" width="70%" height="70%">
+<h3 id="2、存在的问题"><a href="#2、存在的问题" class="headerlink" title="2、存在的问题"></a>2、存在的问题</h3><p>然而，在后续生成目录的过程中发现了这种方法的一个缺点，我会在第二步的第2点中详述。</p>
+<h2 id="第二步：生成导航目录"><a href="#第二步：生成导航目录" class="headerlink" title="第二步：生成导航目录"></a>第二步：生成导航目录</h2><h3 id="1、生成目录指令"><a href="#1、生成目录指令" class="headerlink" title="1、生成目录指令"></a>1、生成目录指令</h3><p>在此前的笔记中提到过，生成目录的代码为：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\tableofcontents</span></span><br></pre></td></tr></table></figure>
 
-<img src="https://user-images.githubusercontent.com/22231832/163685407-f95bad5e-2b29-46ff-b87b-b310de188cd6.jpg" width="70%" height="70%">
+<p>然而在浏览生成的PDF文件时发现，目录栏只有图片而无导航：</p>
+<img src="https://user-images.githubusercontent.com/22231832/167307122-17d7769f-b719-4969-a89a-a603bbc69436.png" width="50%">
 
-<img src="https://user-images.githubusercontent.com/22231832/163685412-4697600b-55f9-4325-86f9-c303eea69949.jpg" width="70%" height="70%">
+<p>查阅资料后发现，这是因为目录并未设置超链接，因此需要增加一条指令。</p>
+<h3 id="2、目录添加超链接"><a href="#2、目录添加超链接" class="headerlink" title="2、目录添加超链接"></a>2、目录添加超链接</h3><p>通过在文件开头添加hyperref包可以实现目录超链接，从而形成左侧导航目录：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;hyperref&#125;  </span><br></pre></td></tr></table></figure>
 
-<img src="https://user-images.githubusercontent.com/22231832/163685416-992a3aa5-7721-4bc4-8259-773013da5ded.jpg" width="70%" height="70%">
+<p>效果如下：</p>
+<img src="https://user-images.githubusercontent.com/22231832/167307126-82ce90b0-9aa8-44b7-9af0-37d6fe8be249.png" width="50%">
 
-<img src="https://user-images.githubusercontent.com/22231832/163685404-62ddd05c-3b4f-4746-8bcd-b3a7386504b2.jpg" width="70%" height="70%">
+<p>可以看到，虽然成功生成了导航目录，但每个加了\leftline的section标题前都多了一个to，超链接目录仍然存在问题。</p>
+<h2 id="第三步：CTEXsetup方法左对齐"><a href="#第三步：CTEXsetup方法左对齐" class="headerlink" title="第三步：CTEXsetup方法左对齐"></a>第三步：CTEXsetup方法左对齐</h2><h3 id="1、CTEXsetup指令"><a href="#1、CTEXsetup指令" class="headerlink" title="1、CTEXsetup指令"></a>1、CTEXsetup指令</h3><p>通过查阅资料，了解到一种直接修改ctexart参数的指令，可以将指令位置后的标题代码都改为左对齐，指令如下：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%添加在欲使左对齐的标题代码前</span></span><br><span class="line"><span class="keyword">\CTEXsetup</span>[format=&#123;<span class="keyword">\Large</span><span class="keyword">\bfseries</span>&#125;]&#123;section&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="https://user-images.githubusercontent.com/22231832/163685414-3712f63b-07da-4287-8508-ae533f33097c.jpg" width="70%" height="70%">
+<p>效果如图：</p>
+<img src="https://user-images.githubusercontent.com/22231832/167307132-4cddd228-f9ca-4ed9-b454-a29374be5b34.png" width="50%">
 
-<img src="https://user-images.githubusercontent.com/22231832/163685408-0d50bf91-b574-4d43-b8b5-00dadffbf424.jpg" width="70%" height="70%">
+<h3 id="2、目录变化"><a href="#2、目录变化" class="headerlink" title="2、目录变化"></a>2、目录变化</h3><p>添加CTEXsetup指令并删去leftline指令后，发现导航栏变为正常显示：</p>
+<img src="https://user-images.githubusercontent.com/22231832/167307139-bbba178e-e0cd-49d7-9769-7085c3d155f2.png" width="50%">
 
+<p>综上，标题居中及目录导航生成问题获得解决。</p>
 
     </div>
 
@@ -306,8 +297,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%91%84%E5%BD%B1/" rel="tag"># 摄影</a>
-              <a href="/tags/%E5%9C%B0%E6%96%B9%E5%BF%97/" rel="tag"># 地方志</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" rel="tag"># 技术学习</a>
+              <a href="/tags/%E5%AD%A6%E6%9C%AF%E5%86%99%E4%BD%9C/" rel="tag"># 学术写作</a>
           </div>
 
         
@@ -316,13 +307,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/04/15/%E8%80%83%E7%A0%94%E6%80%BB%E7%BB%93/" rel="prev" title="考研经验与回顾">
-      <i class="fa fa-chevron-left"></i> 考研经验与回顾
+    <a href="/2022/05/07/LaTeX%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/" rel="prev" title="LaTeX语法笔记">
+      <i class="fa fa-chevron-left"></i> LaTeX语法笔记
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/04/18/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E8%B5%84%E6%96%99%E6%94%B6%E9%9B%86/" rel="next" title="数据科学资料收集">
-      数据科学资料收集 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -381,7 +369,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BE%8A%E7%8D%AC%E6%9D%A5%E5%8E%86"><span class="nav-text">一、羊獬来历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B8%89%E6%9C%88%E4%B8%89%E2%80%9C%E6%8E%A5%E5%A7%91%E5%A7%91%E2%80%9D"><span class="nav-text">二、三月三“接姑姑”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%85%89%E5%BD%B1%E7%95%99%E5%BF%B5"><span class="nav-text">三、光影留念</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%A6%82%E8%BF%B0"><span class="nav-text">问题概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E9%A2%98%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="nav-text">标题对齐方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF%E7%9B%AE%E5%BD%95%E7%94%9F%E6%88%90"><span class="nav-text">PDF目录生成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B"><span class="nav-text">解决过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A-leftline%E9%9D%A0%E5%B7%A6"><span class="nav-text">第一步：\leftline靠左</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%8C%87%E4%BB%A4%E4%BB%A3%E7%A0%81"><span class="nav-text">1、指令代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">2、存在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%94%9F%E6%88%90%E5%AF%BC%E8%88%AA%E7%9B%AE%E5%BD%95"><span class="nav-text">第二步：生成导航目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%94%9F%E6%88%90%E7%9B%AE%E5%BD%95%E6%8C%87%E4%BB%A4"><span class="nav-text">1、生成目录指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%9B%AE%E5%BD%95%E6%B7%BB%E5%8A%A0%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="nav-text">2、目录添加超链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9ACTEXsetup%E6%96%B9%E6%B3%95%E5%B7%A6%E5%AF%B9%E9%BD%90"><span class="nav-text">第三步：CTEXsetup方法左对齐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81CTEXsetup%E6%8C%87%E4%BB%A4"><span class="nav-text">1、CTEXsetup指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%9B%AE%E5%BD%95%E5%8F%98%E5%8C%96"><span class="nav-text">2、目录变化</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

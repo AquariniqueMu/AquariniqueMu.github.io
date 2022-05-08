@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>LaTeX标题居中与目录生成</title>
+      <link href="/2022/05/09/LaTeX%E6%A0%87%E9%A2%98%E5%B1%85%E4%B8%AD%E4%B8%8E%E5%AF%BC%E8%88%AA%E7%9B%AE%E5%BD%95/"/>
+      <url>/2022/05/09/LaTeX%E6%A0%87%E9%A2%98%E5%B1%85%E4%B8%AD%E4%B8%8E%E5%AF%BC%E8%88%AA%E7%9B%AE%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h1><p>在使用LaTeX编辑的过程中遇到了两个问题，记录如下：</p><h2 id="标题对齐方式"><a href="#标题对齐方式" class="headerlink" title="标题对齐方式"></a>标题对齐方式</h2><p>在LaTeX的ctexart文本中，默认标题采用居中对齐的方式，如图所示。然而我个人比较偏向靠左对齐。</p><img src="https://user-images.githubusercontent.com/22231832/167307140-8a1c9cb9-b9d8-4c3b-a557-13651e97e252.png" width="50%"><h2 id="PDF目录生成"><a href="#PDF目录生成" class="headerlink" title="PDF目录生成"></a>PDF目录生成</h2><p>一般的生成目录指令只能在页面中生成目录，无法在pdf页面生成带链接的左侧导航目录。</p><h1 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h1><h2 id="第一步：-leftline靠左"><a href="#第一步：-leftline靠左" class="headerlink" title="第一步：\leftline靠左"></a>第一步：\leftline靠左</h2><h3 id="1、指令代码"><a href="#1、指令代码" class="headerlink" title="1、指令代码"></a>1、指令代码</h3><p>起初，我采取了leftline指令，具体命令如下：</p><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\section</span>&#123;<span class="keyword">\leftline</span>&#123;主要创新点&#125;&#125;</span><br></pre></td></tr></table></figure><p>加入后成功实现了标题靠左对其效果：</p><img src="https://user-images.githubusercontent.com/22231832/167307117-a2603a62-9d21-4a51-8d6a-adf18de58693.png" width="50%"><h3 id="2、存在的问题"><a href="#2、存在的问题" class="headerlink" title="2、存在的问题"></a>2、存在的问题</h3><p>然而，在后续生成目录的过程中发现了这种方法的一个缺点，我会在第二步的第2点中详述。</p><h2 id="第二步：生成导航目录"><a href="#第二步：生成导航目录" class="headerlink" title="第二步：生成导航目录"></a>第二步：生成导航目录</h2><h3 id="1、生成目录指令"><a href="#1、生成目录指令" class="headerlink" title="1、生成目录指令"></a>1、生成目录指令</h3><p>在此前的笔记中提到过，生成目录的代码为：</p><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\tableofcontents</span></span><br></pre></td></tr></table></figure><p>然而在浏览生成的PDF文件时发现，目录栏只有图片而无导航：</p><img src="https://user-images.githubusercontent.com/22231832/167307122-17d7769f-b719-4969-a89a-a603bbc69436.png" width="50%"><p>查阅资料后发现，这是因为目录并未设置超链接，因此需要增加一条指令。</p><h3 id="2、目录添加超链接"><a href="#2、目录添加超链接" class="headerlink" title="2、目录添加超链接"></a>2、目录添加超链接</h3><p>通过在文件开头添加hyperref包可以实现目录超链接，从而形成左侧导航目录：</p><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;hyperref&#125;  </span><br></pre></td></tr></table></figure><p>效果如下：</p><img src="https://user-images.githubusercontent.com/22231832/167307126-82ce90b0-9aa8-44b7-9af0-37d6fe8be249.png" width="50%"><p>可以看到，虽然成功生成了导航目录，但每个加了\leftline的section标题前都多了一个to，超链接目录仍然存在问题。</p><h2 id="第三步：CTEXsetup方法左对齐"><a href="#第三步：CTEXsetup方法左对齐" class="headerlink" title="第三步：CTEXsetup方法左对齐"></a>第三步：CTEXsetup方法左对齐</h2><h3 id="1、CTEXsetup指令"><a href="#1、CTEXsetup指令" class="headerlink" title="1、CTEXsetup指令"></a>1、CTEXsetup指令</h3><p>通过查阅资料，了解到一种直接修改ctexart参数的指令，可以将指令位置后的标题代码都改为左对齐，指令如下：</p><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%添加在欲使左对齐的标题代码前</span></span><br><span class="line"><span class="keyword">\CTEXsetup</span>[format=&#123;<span class="keyword">\Large</span><span class="keyword">\bfseries</span>&#125;]&#123;section&#125;</span><br></pre></td></tr></table></figure><p>效果如图：</p><img src="https://user-images.githubusercontent.com/22231832/167307132-4cddd228-f9ca-4ed9-b454-a29374be5b34.png" width="50%"><h3 id="2、目录变化"><a href="#2、目录变化" class="headerlink" title="2、目录变化"></a>2、目录变化</h3><p>添加CTEXsetup指令并删去leftline指令后，发现导航栏变为正常显示：</p><img src="https://user-images.githubusercontent.com/22231832/167307139-bbba178e-e0cd-49d7-9769-7085c3d155f2.png" width="50%"><p>综上，标题居中及目录导航生成问题获得解决。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> LaTeX学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 技术学习 </tag>
+            
+            <tag> 学术写作 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>LaTeX语法笔记</title>
       <link href="/2022/05/07/LaTeX%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
       <url>/2022/05/07/LaTeX%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</url>
@@ -13,7 +40,7 @@
       
       <categories>
           
-          <category> 方法学习笔记 </category>
+          <category> LaTeX学习笔记 </category>
           
       </categories>
       
