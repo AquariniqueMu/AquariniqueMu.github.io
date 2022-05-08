@@ -4,8 +4,8 @@ function snowFall(snow) {
     /* 可配置属性 */
     snow = snow || {};
     this.maxFlake = snow.maxFlake || 200; /* 最多片数 */
-    this.flakeSize = snow.flakeSize || 5; /* 雪花形状 */
-    this.fallSpeed = snow.fallSpeed || 3; /* 坠落速度 */
+    this.flakeSize = snow.flakeSize || 3; /* 雪花形状 */
+    this.fallSpeed = snow.fallSpeed || 2; /* 坠落速度 */
 }
 /* 兼容写法 */
 requestAnimationFrame = window.requestAnimationFrame ||
