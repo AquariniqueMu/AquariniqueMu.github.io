@@ -527,6 +527,16 @@
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://example.com/2022/04/17/%E5%85%89%E5%BD%B1%E9%9B%86%EF%BC%9A%E6%B4%AA%E6%B4%9E%E7%BE%8A%E7%8D%AC%E5%94%90%E5%B0%A7%E6%95%85%E5%9B%AD/',]
+      });
+      });
+  </script>
 
 </body>
 </html>
