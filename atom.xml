@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-06-10T07:51:59.820Z</updated>
+  <updated>2022-06-10T08:38:09.283Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,33 +17,13 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/README%E6%A8%A1%E6%9D%BF/"/>
-    <id>http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/README%E6%A8%A1%E6%9D%BF/</id>
-    <published>2022-06-10T08:10:33.796Z</published>
-    <updated>2022-06-10T07:51:59.820Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Identifying-influential-nodes-in-complex-networks-Effective-distance-gravity-model"><a href="#Identifying-influential-nodes-in-complex-networks-Effective-distance-gravity-model" class="headerlink" title="Identifying influential nodes in complex networks: Effective distance gravity model"></a>Identifying influential nodes in complex networks: Effective distance gravity model</h1><h2 id="文献信息"><a href="#文献信息" class="headerlink" title="文献信息"></a>文献信息</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><em><strong>识别复杂网络中具有影响力的节点 - 有效距离引力模型</strong></em></p><h3 id="发布时间："><a href="#发布时间：" class="headerlink" title="发布时间："></a>发布时间：</h3><p>December 2018</p><h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Complex networks</p><p>Influential nodes</p><p>Gravity model</p><p>Effective distance</p><p>Susceptible infected model</p><h2 id="作者信息"><a href="#作者信息" class="headerlink" title="作者信息"></a>作者信息</h2><h3 id="作者姓名："><a href="#作者姓名：" class="headerlink" title="作者姓名："></a>作者姓名：</h3><p>Qiuyan Shang, Yong Deng, Kang Hao Cheong</p><h3 id="作者信息："><a href="#作者信息：" class="headerlink" title="作者信息："></a><strong>作者信息：</strong></h3><p>电子科技大学基础与前沿科学研究院</p><p>电子科技大学英才学院</p><p>陕西师范大学教育学院</p><p>新加坡科技与设计大学Science, Mathematics and Technology Cluster</p><p>SUTD-马萨诸塞州技术学院国际设计中心</p><h2 id="期刊信息"><a href="#期刊信息" class="headerlink" title="期刊信息"></a>期刊信息</h2><p>期刊名：<em>《<strong>Information Sciences</strong>》</em></p><p>中科院SCI:  </p><p><img src="/sci.png" alt="sci分区"></p><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>复杂网络中重要节点的识别通常使用传统的欧氏距离，它只关注节点之间的局部静态地理距离，却忽略了现实世界网络中节点之间的动态互动。为了识别有影响力的节点，静态和动态信息都应该被考虑。</p><p>本文提出了一个原创的、新颖的、具有有效距离的引力模型，用于识别基于信息融合和多层次处理的有影响力的节点。本文的方法能够综合考虑复杂网络的全局和局部信息，并<u>利用有效距离来整合静态和动态信息</u>。此外，所提出的方法可以帮助本文挖掘现实世界网络中隐藏的拓扑结构，获得更准确的结果。利用易受感染的模型、Kendall相关系数和现有的八种识别方法，对12个不同的真实网络进行了模拟实验。</p><h2 id="内容总结"><a href="#内容总结" class="headerlink" title="内容总结"></a>内容总结</h2>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Identifying-influential-nodes-in-complex-networks-Effective-distance-gravity-model&quot;&gt;&lt;a href=&quot;#Identifying-influential-nodes-in-compl</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>文档与工具下载汇总</title>
     <link href="http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/"/>
     <id>http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/</id>
     <published>2022-06-10T08:10:33.000Z</published>
-    <updated>2022-06-10T08:35:53.107Z</updated>
+    <updated>2022-06-10T08:38:09.283Z</updated>
     
-    <content type="html"><![CDATA[<img src="/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/computer.jpg" class><h1 id="Documents"><a href="#Documents" class="headerlink" title="Documents"></a>Documents</h1><h2 id="实验室文献上传所用README模板"><a href="#实验室文献上传所用README模板" class="headerlink" title="实验室文献上传所用README模板"></a>实验室文献上传所用README模板</h2><p><a href="./README%E6%A8%A1%E6%9D%BF.md">文献上传README模板</a></p><h1 id="Computer-Tools"><a href="#Computer-Tools" class="headerlink" title="Computer Tools"></a>Computer Tools</h1><h2 id="Github访问加速器"><a href="#Github访问加速器" class="headerlink" title="Github访问加速器"></a>Github访问加速器</h2><p><a href="https://github.com/dotnetcore/FastGithub">fastgithub网址</a></p><p><a href="./fastgithub_win-x64.zip">fastgithub2.1.4下载</a></p>]]></content>
+    <content type="html"><![CDATA[<img src="/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/computer.jpg" class><h1 id="Documents"><a href="#Documents" class="headerlink" title="Documents"></a>Documents</h1><h2 id="实验室文献上传所用README模板"><a href="#实验室文献上传所用README模板" class="headerlink" title="实验室文献上传所用README模板"></a>实验室文献上传所用README模板</h2><p><a href="./README.rar">文献上传README模板</a></p><h1 id="Computer-Tools"><a href="#Computer-Tools" class="headerlink" title="Computer Tools"></a>Computer Tools</h1><h2 id="Github访问加速器"><a href="#Github访问加速器" class="headerlink" title="Github访问加速器"></a>Github访问加速器</h2><p><a href="https://github.com/dotnetcore/FastGithub">fastgithub网址</a></p><p><a href="./fastgithub_win-x64.zip">fastgithub2.1.4下载</a></p>]]></content>
     
     
     <summary type="html">一些比较需要云端存储或通过链接提供下载功能的文件集合，计划主要用于中转下载，会不定期更新。</summary>
@@ -124,9 +104,9 @@
     <category term="学习资料" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
     
     
-    <category term="数据科学" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
-    
     <category term="技术学习" scheme="http://example.com/tags/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="数据科学" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
     
   </entry>
   
