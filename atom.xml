@@ -18,8 +18,8 @@
   
   <entry>
     <title></title>
-    <link href="http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/README/"/>
-    <id>http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/README/</id>
+    <link href="http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/README%E6%A8%A1%E6%9D%BF/"/>
+    <id>http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/README%E6%A8%A1%E6%9D%BF/</id>
     <published>2022-06-10T08:10:33.796Z</published>
     <updated>2022-06-10T07:51:59.820Z</updated>
     
@@ -41,9 +41,9 @@
     <link href="http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/"/>
     <id>http://example.com/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/</id>
     <published>2022-06-10T08:10:33.000Z</published>
-    <updated>2022-06-10T08:10:33.791Z</updated>
+    <updated>2022-06-10T08:35:53.107Z</updated>
     
-    <content type="html"><![CDATA[<img src="/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/computer.jpg" class><h1 id="Documents"><a href="#Documents" class="headerlink" title="Documents"></a>Documents</h1><h2 id="实验室文献上传所用README模板"><a href="#实验室文献上传所用README模板" class="headerlink" title="实验室文献上传所用README模板"></a>实验室文献上传所用README模板</h2><p><a href="./README.md">文献上传README模板</a></p><h1 id="Computer-Tools"><a href="#Computer-Tools" class="headerlink" title="Computer Tools"></a>Computer Tools</h1><h2 id="Github访问加速器"><a href="#Github访问加速器" class="headerlink" title="Github访问加速器"></a>Github访问加速器</h2><p><a href="https://github.com/dotnetcore/FastGithub">fastgithub网址</a></p><p><a href="./fastgithub_win-x64.zip">fastgithub2.1.4下载</a></p>]]></content>
+    <content type="html"><![CDATA[<img src="/2022/06/10/%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%B1%87%E6%80%BB/computer.jpg" class><h1 id="Documents"><a href="#Documents" class="headerlink" title="Documents"></a>Documents</h1><h2 id="实验室文献上传所用README模板"><a href="#实验室文献上传所用README模板" class="headerlink" title="实验室文献上传所用README模板"></a>实验室文献上传所用README模板</h2><p><a href="./README%E6%A8%A1%E6%9D%BF.md">文献上传README模板</a></p><h1 id="Computer-Tools"><a href="#Computer-Tools" class="headerlink" title="Computer Tools"></a>Computer Tools</h1><h2 id="Github访问加速器"><a href="#Github访问加速器" class="headerlink" title="Github访问加速器"></a>Github访问加速器</h2><p><a href="https://github.com/dotnetcore/FastGithub">fastgithub网址</a></p><p><a href="./fastgithub_win-x64.zip">fastgithub2.1.4下载</a></p>]]></content>
     
     
     <summary type="html">一些比较需要云端存储或通过链接提供下载功能的文件集合，计划主要用于中转下载，会不定期更新。</summary>
@@ -124,9 +124,9 @@
     <category term="学习资料" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
     
     
-    <category term="技术学习" scheme="http://example.com/tags/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
-    
     <category term="数据科学" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="技术学习" scheme="http://example.com/tags/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
