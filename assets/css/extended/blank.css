@@ -16,6 +16,7 @@
     --code-bg: rgb(245, 245, 245);
     --border: rgb(238, 238, 238)
 }
+
 .post-content{
     /* 设置中文字体 */
     font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", "SimSun", sans-serif;
@@ -24,7 +25,7 @@
     /* 段落间距 */
     margin-bottom: 1em;
     /* 段落首行缩进 */
-    text-indent: 2em;
+    /* text-indent: 2em; */
 }
 body {
     font-size: 16px;
@@ -116,4 +117,11 @@ code {
 }
 .dark {
     --hljs-bg: #272b33;
+}
+.dark.list{
+    background-image: url("../../img/dark.png") !important;
+}
+/* 图片尺寸缩小 */
+.list{
+    background-image: url("../../img/light.png") !important;
 }
