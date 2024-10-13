@@ -22,7 +22,6 @@ _testmain.go
 *.exe
 *.test
 
-/public
 .DS_Store
 .hugo_build.lock
 resources/_gen/
