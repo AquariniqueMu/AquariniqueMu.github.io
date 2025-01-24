@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://AquariniqueMu.github.io/sitemap.xml
