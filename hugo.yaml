@@ -96,7 +96,7 @@ params:
   ShowCodeCopyButtons: true
   homeInfoParams:
     Title: 👋Welcome to Junwen's Blog
-    Content: Hi, this is Junwen. I graduated from **Beijing University of Posts and Telecommunications** with a bachelor's degree in communication engineering. Currently, I am a third-year master's student at the School of Data Science and Intelligent Media, **Communication University of China**. My main research directions include complex network node importance algorithms, graph neural networks, and LLM agent systems. I have internship experience in **multimodal LLM evaluation, automated testing, social network data crawling, front-end and back-end system construction, and fine-tuning of LLMs**.
+    Content: Hi, this is Junwen. I hold a bachelor's degree in Communication Engineering from **Beijing University of Posts and Telecommunications** and am currently a third-year master's student at the School of Data Science and Intelligent Media, **Communication University of China**. My primary research interests encompass **algorithms for evaluating node importance in complex networks**, **graph neural networks (GNNs)**, and **LLM-based agent systems**. I have gained extensive internship experience in **multimodal LLM benchmarking, automated testing, social network data acquisition, full-stack system development, and LLM fine-tuning**.
 
   socialIcons: # optional
     - name: github
