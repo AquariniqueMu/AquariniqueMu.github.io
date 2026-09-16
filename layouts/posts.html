@@ -1,0 +1,17 @@
+{{ define "main" }}
+  {{ .Scratch.Set "scope" "list" }}
+  <header class="mb-10">
+    <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+  </header>
+  {{ $entries := (where site.RegularPages "Section" "in" site.Params.mainSections).ByDate.Reverse }}
+  {{ $pager := .Paginate $entries }}
+  <section class="space-y-10 w-full" aria-label="All posts, newest first">
+    {{ range $pager.Pages.GroupByDate "2006" "desc" }}
+      <h2 class="mt-12 text-2xl font-bold text-neutral-700 first:mt-8 dark:text-neutral-300">{{ .Key }}</h2>
+      {{ range .Pages.ByDate.Reverse }}
+        {{ partial "article-link/simple.html" . }}
+      {{ end }}
+    {{ end }}
+  </section>
+  {{ partial "pagination.html" . }}
+{{ end }}

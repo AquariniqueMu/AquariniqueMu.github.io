@@ -2,7 +2,7 @@
 
 核对日期：2026-09-16。适用版本：Hugo **0.165.0**、Blowfish **v3.6.0**。
 
-本文记录站点实际采用的架构、附件方案中经过源码核对的修正、迁移边界、部署方式和后续维护方法。日常写作请直接阅读 [WRITING.md](WRITING.md)；旧站文章与附件清单见 [MIGRATION.md](MIGRATION.md)。
+本文记录站点实际采用的架构、附件方案中经过源码核对的修正、迁移边界、部署方式和后续维护方法。日常写作请直接阅读 [WRITING.md](WRITING.md)；旧站文章与附件清单见 [MIGRATION.md](MIGRATION.md)；本轮分区、个人简介与全页背景调整见 [CHANGES-2026-09-16-followup.md](CHANGES-2026-09-16-followup.md)。
 
 > 已于 2026-09-16 完成部署和公网验收：[Junwen'Log](https://aquariniquemu.github.io/)。[首次部署运行记录](https://github.com/AquariniqueMu/AquariniqueMu.github.io/actions/runs/35057756195)显示 build 与 deploy 均成功。详细验收与已知限制见第 10 节。
 
@@ -14,15 +14,21 @@
 
 | 分区 | 路径 | 展示方式 |
 | --- | --- | --- |
-| Technology | `/posts/` | 按年份分组的文字列表，隐藏封面，文章显示目录 |
-| Reading & notes | `/notes/` | 文字列表，适合读书笔记和长篇反思；可用 series 组织连续笔记 |
-| Travel | `/travel/` | 封面卡片，文章封面作为淡化背景，并按需加载灯箱 |
+| Posts | `/posts/` | 汇总 Tech、Notes、Daily 全部已发布文章，按时间倒序、按年分组并分页 |
+| Tech | `/tech/` | 技术文章文字列表，隐藏列表封面，文章显示目录 |
+| Notes | `/notes/` | 所有类型的笔记，包括读书、学习与反思；可用 series 组织连续笔记 |
+| Daily | `/daily/` | 日常生活和游记，封面卡片及按需加载的灯箱；旧 `/travel/` 跳转至此 |
+| Tags | `/tags/` | 跨分区标签索引 |
 | About | `/about/` | 简短真实介绍，不编造个人经历 |
 | Archive | `/archives/` | 跨三个分区的文章时间线 |
 
-首页采用 Blowfish 的 `homepage.layout = "page"`，显示介绍、三个分区入口、最近 5 篇及 All writing 入口；不设置背景大图。以 `github` 配色为基础，自定义米白底色、克制的绿色强调和细分隔线；默认浅色并支持系统外观与手动切换。正文现采用系统无衬线字体，中文回退到苹方、微软雅黑等系统字体；页面不请求 Inter 或完整中文字体包。标签使用拜占庭紫 `#702963`，深色外观用较亮的 `#d79acb`。
+首页采用 Blowfish 的 `homepage.layout = "page"`，由 `layouts/partials/home/page.html` 显示居中的个人简介、三个分区入口、最多最近 5 篇及指向 `/posts/` 的 Show more 按钮；不设置首页背景大图。个人简介包含 144px 圆形阴影头像（手机 128px）、名称 **Junwen**、GitHub 与 Blog 链接。头像采用用户提供的照片，由 ImageGen 调色后存为 `assets/img/avatar-graded.png`，构建时由 Hugo 输出 320px WebP。介绍文字为：
 
-主导航为 **Posts · Archive · Gallery · Tags · 外观切换 · 搜索**；Gallery 指向 `/travel/`，读书笔记仍可从首页、Archive 和标签进入。参照 [Lilian Weng 的文章](https://lilianweng.github.io/posts/2026-07-04-harness/) 实测比例：正文 16px / 1.6、桌面标题 36px、文章单列最大 720px、导航高 60px。日期与字数一行桌面 14px、手机 12px。`layouts/single.html` 与 `partials/toc.html` 将目录置于正文上方，用原生 `details` 默认收起；摘要标题居中，展开后的层级列表左对齐。文章阅读栏整体居中，正文按正常左对齐排版。
+> This is Junwen. I'm documenting what I learn, what I read, and what I experience along the way.
+
+以 `github` 配色为基础，自定义米白底色和细分隔线；默认浅色并支持系统外观与手动切换。正文使用系统无衬线字体，中文回退到苹方、微软雅黑等系统字体，不下载额外字体。标签、Markdown 引用和 Show more 使用拜占庭紫 `#702963`，深色外观用较亮的 `#d79acb`。
+
+主导航为 **Posts · Tech · Notes · Daily · Tags · About · 外观切换 · 搜索**。Posts 是独立聚合页，不再指向技术分区；归档页仍保留在 `/archives/`。参照 [Lilian Weng 的文章](https://lilianweng.github.io/posts/2026-07-04-harness/) 实测比例：正文 16px / 1.6、桌面标题 36px、文章单列最大 720px、导航高 60px；本轮将导航文字缩为 14px、站点名称缩为 20px。日期与字数一行桌面 14px、手机 12px。`layouts/single.html` 与 `partials/toc.html` 将目录置于正文上方，用原生 `details` 默认收起；摘要标题居中，展开后的层级列表左对齐。文章阅读栏整体居中，正文按正常左对齐排版。
 
 保留站内搜索、代码复制、RSS、标签和系列；不用 categories、访问计数或点赞服务。数学在构建时生成 MathML。页面仍可有搜索、菜单、外观切换等 JavaScript，“零 JS 数学”不表示全站完全无 JavaScript。
 
@@ -61,6 +67,7 @@ junwen-log/
 ├── archetypes/              # 三种分区的新文章模板
 ├── assets/
 │   ├── css/                 # 自定义排版、配色补充
+│   ├── img/                 # 调色头像等站点图片资源
 │   ├── js/                  # 图库初始化及主题小型覆盖
 │   └── lib/                 # 本地 GLightbox 与许可证
 ├── config/_default/
@@ -103,23 +110,28 @@ buildFuture = false
   lastmod = ["lastmod", ":git", "date"]
 ```
 
-正文永久链接分别为：
+文章源文件分别存于 `content/tech/<slug>/index.md`、`content/notes/<slug>/index.md`、`content/daily/<slug>/index.md`。`content/posts/_index.md` 配合 `layouts/posts.html` 汇总 `mainSections = ["tech", "notes", "daily"]` 的正式文章，并按日期倒序输出，不能在 posts 下新建稿件。
 
-```text
-/posts/:year/:month/:day/:slug/
-/notes/:year/:month/:slug/
-/travel/:year/:month/:slug/
+正文永久链接配置为：
+
+```toml
+[permalinks.page]
+  tech = "/posts/:year/:month/:day/:slug/"
+  notes = "/notes/:year/:month/:slug/"
+  daily = "/daily/:year/:month/:slug/"
 ```
+
+技术文章虽然改存于 `content/tech/`，仍沿用 `/posts/日期/slug/` 以保留已发布链接。Daily 文章使用 `/daily/` 日期路径，已有摄影文章保留原 `/travel/` 地址为 alias，旧 `/travel/` 分区页也跳转至 `/daily/`。
 
 旧文章额外保留 `aliases`，见迁移清单。发布后不要随意更改 `date`、目录 slug 或永久链接格式；确有需要时添加旧 URL 的 alias。`lastmod` 可随修订变化，不能用它代替原发布日期。
 
 `contentLanguage` 是本项目的文章参数，不会自动创建第二套中文站点。中文文章设为 `zh-CN`，默认是 `en`。本项目的 `layouts/baseof.html` 将它写入 `<html lang>`，同时在 body 输出 `data-section` 供分区样式使用；导航文字仍保持英文。`hasCJKLanguage = true` 允许 Hugo 对中文进行相应的字数统计；无需把整个界面切换为中文。
 
-分区继承以 Technology 为例：
+分区继承以 Tech 为例：
 
 ```yaml
 ---
-title: Technology
+title: Tech
 cardView: false
 groupByYear: true
 cascade:
@@ -130,9 +142,9 @@ cascade:
 ---
 ```
 
-Travel 的分区页设置 `cardView: true`，传给文章的设置包含 `hideFeatureImage: false`、`showTableOfContents: false`。文章自己的参数优先于 cascade。当前自定义单页模板不再显示占据正文空间的 Hero；`showHero` 和 `heroStyle` 为迁移保留值，不控制新背景。
+Daily 的分区页设置 `cardView: true`，传给文章的设置包含 `hideFeatureImage: false`、`showTableOfContents: false`。文章自己的参数优先于 cascade。当前自定义单页模板不再显示占据正文空间的 Hero；`showHero` 和 `heroStyle` 为迁移保留值，不控制新背景。
 
-`layouts/partials/article-background.html` 从本地 `featureimage` 参数或 bundle 中的 `*feature*`、`*cover*`、`*thumbnail*` 自动选择静态位图，生成最大 1920px WebP 和 640/1024px 候选。图片保持比例完整显示在正文后方，不占文流空间，浅色不透明度 12%、深色 10%，下方渐隐。无封面的文章不输出背景。SVG/GIF 不用作这一装饰背景。
+`layouts/partials/article-background.html` 从本地 `featureimage` 参数或 bundle 中的 `*feature*`、`*cover*`、`*thumbnail*` 自动选择静态位图，生成最大 1920px WebP 和 640/1024px 候选。背景容器使用 `position: fixed; inset: 0` 覆盖整个浏览器视口，包括导航下方和正文两侧，随文章滚动持续可见。图片以 `object-fit: cover` 保持原比例铺满，允许裁剪边缘，不占文流空间；浅色不透明度 10%、深色 8%，不加底部渐隐。无封面的文章不输出背景。SVG/GIF 不用作这一装饰背景。
 
 ## 4. 数学、图片、画廊与搜索
 
@@ -196,11 +208,11 @@ RSS 位于 `/index.xml`，站点地图 `/sitemap.xml`，爬虫规则 `/robots.tx
 
 旧仓库本地副本保存在相邻目录 `../junwen-log-legacy`。新站只迁移需要的 Markdown 与引用资源，不把旧 `public/` 全量带进源码。详细逐项记录见 [MIGRATION.md](MIGRATION.md)。
 
-首次迁移保留 **5 篇已发布文章、1 篇原有草稿**；另外新增一篇英文站点介绍。后续按用户要求删除了《实验室主机连接手册》和 8 张附图，当前为 **4 篇旧文章 + 1 篇英文介绍 + 1 篇草稿**。该页的新旧 URL 均不再发布，文件可从 Git 历史恢复。技术文章归入 posts，考研回顾归入 notes，唐尧故园摄影归入 travel；没有把个人回顾虚构成书评，也没有生成虚构旅行经历。
+首次迁移保留 **5 篇已发布文章、1 篇原有草稿**；另外新增一篇英文站点介绍。后续按用户要求删除《实验室主机连接手册》和 8 张附图，本轮又删除英文示例介绍《A quieter home for these notes》，当前为 **4 篇正式文章 + 1 篇草稿**。删除内容不再发布，文件可从 Git 历史恢复。技术文章归入 tech，考研回顾归入 notes，唐尧故园摄影归入 daily；没有把个人回顾虚构成书评，也没有生成虚构旅行经历。
 
-旧的 5 个正式文章地址从旧 sitemap 或生成 HTML 的 canonical 核实后写入 aliases。GitHub Pages 将提供 Hugo 生成的跳转 HTML，导向新日期路径。旧预览产物中的 localhost 地址不作为正式 URL 迁移，也不作为擅自发布草稿的依据。
+首次迁移时，旧的 5 个正式文章地址从旧 sitemap 或生成 HTML 的 canonical 核实后写入 aliases。目前保留的 4 篇文章继续提供这些旧链接的跳转；删除的实验室指南不再生成跳转。GitHub Pages 提供 Hugo 生成的跳转 HTML，导向当前日期路径。旧预览产物中的 localhost 地址不作为正式 URL 迁移，也不作为擅自发布草稿的依据。
 
-17 张引用图片全部本地化，原始资源约 **20.25 MB**：8 张实验室截图从旧 `public/img/` 恢复、1 张旧目录照片、8 张文章原来引用的 GitHub 图片。所有图片已确认可解码并有有效尺寸。旧本地图片保持字节一致；在交付 HTML 中优化图片不等于删除原图。
+首次迁移时，17 张引用图片全部本地化，原始资源约 **20.25 MB**：8 张实验室截图从旧 `public/img/` 恢复、1 张旧目录照片、8 张文章原来引用的 GitHub 图片。所有图片已确认可解码并有有效尺寸。旧本地图片保持字节一致；在交付 HTML 中优化图片不等于删除原图。
 
 最终游记的“光影留念”段落改为 `photo-gallery match="*.jpg"`：8 张原照片组成网格与灯箱，`feature.jpg` 同时作为文章题图。图片内容和原文保持，展示形式从原来的逐图标记调整为图库；题图再次出现在图库是同一资源的两处呈现，没有新造或替换照片。
 
@@ -208,7 +220,7 @@ RSS 位于 `/index.xml`，站点地图 `/sitemap.xml`，爬虫规则 `/robots.tx
 
 考研回顾中的 **5 个历史下载附件**不在旧源仓库中，旧站对应请求也返回 404；保留原链接和文件名以便恢复。将原文件放回该文章 bundle 的同名路径即可。它们是已记录的历史缺失，不能在验收报告中写成“所有旧链接均已恢复”。
 
-本次已获取远端 `main` 历史，并将新工作树连接到既有提交历史；旧站基线 commit 为 `906bdd7`。本地已建立 **`backup-before-blowfish-2026-09-16`** 标签，指向迁移前远端 `main`，计划随首次迁移提交一并推送。新实现作为这个历史之后的普通提交发布，不强推。旧站生成产物从当前版本追踪中移除，但仍存在于旧历史与原始副本中。
+本次已获取远端 `main` 历史，并将新工作树连接到既有提交历史；旧站基线 commit 为 `906bdd7`。本地已建立 **`backup-before-blowfish-2026-09-16`** 标签，指向迁移前远端 `main`，已随首次迁移推送。新实现作为这个历史之后的普通提交发布，不强推。旧站生成产物从当前版本追踪中移除，但仍存在于旧历史与原始副本中。
 
 ## 6. 构建与 GitHub Pages 部署
 
@@ -265,7 +277,7 @@ git submodule status
 
 推送后查看仓库 [Actions](https://github.com/AquariniqueMu/AquariniqueMu.github.io/actions) 中对应 commit 的运行。必须以部署 job 成功和公网站点可访问为完成依据；只看到 `git push` 成功不算部署通过。
 
-线上至少检查：首页、三个分区、英文介绍、一个中文长文、摄影文章、搜索、RSS、站点地图，以及五个旧文章地址。用未带本机预览状态的浏览器访问，确认没有 `localhost`、预览脚本或草稿正文。最后记录成功的 commit SHA、Actions run URL 和访问日期，便于追踪。
+线上至少检查：首页个人简介、Posts 聚合页、三个写作分区、About、一个中文长文、摄影文章、搜索、RSS、站点地图，以及保留文章的新旧地址。确认已删除的实验室指南与英文示例介绍不出现在页面、搜索、RSS 中。用未带本机预览状态的浏览器访问，确认没有 `localhost`、预览脚本或草稿正文。最后记录成功的 commit SHA、Actions run URL 和访问日期，便于追踪。
 
 ## 7. Mac 写作与一键发布
 
@@ -277,7 +289,7 @@ CLI 使用 Python 标准库，脚本自己定位仓库，不要求 Finder 启动
 
 ```sh
 # 建英文技术草稿并打开编辑器
-./scripts/blog new posts "An idea worth keeping" --slug an-idea-worth-keeping --open
+./scripts/blog new tech "An idea worth keeping" --slug an-idea-worth-keeping --open
 
 # 建中文读书笔记，URL 仍用英文 slug
 ./scripts/blog new notes "阅读札记" --slug reading-notes --language zh-CN --open
@@ -299,7 +311,7 @@ CLI 使用 Python 标准库，脚本自己定位仓库，不要求 Finder 启动
 ./scripts/blog stop-preview
 ```
 
-预览监听 `127.0.0.1:1313`，包括草稿与未来日期文章；生产检查不包括。可通过 `--editor mweb` 打开 MWeb。创建草稿拒绝覆盖现有 bundle；中文标题和英文 slug 分开输入。
+新建分区仅为 `tech`、`notes`、`daily`，现有 macOS 启动器直接调用更新后的脚本，无需重装。预览监听 `127.0.0.1:1313`，包括草稿与未来日期文章；生产检查不包括。可通过 `--editor mweb` 打开 MWeb。创建草稿拒绝覆盖现有 bundle；中文标题和英文 slug 分开输入。
 
 发布过程先构建检查、提交允许目录内的已保存修改，随后同步远端并再次验证，最后普通 push。脚本不自动 stash、不强推、不静默解冲突；出现冲突时保留本地提交并停止。第一次检查失败时，会在内容未被其他操作改写的条件下恢复选中草稿的原状态。
 
@@ -355,9 +367,9 @@ git push origin main
 
 ## 10. 验收记录与未决事项
 
-以下表格保留 2026-09-16 首次上线的本地及线上验收记录。首次上线提交为 `d054d61`，通过 `./scripts/blog publish` 执行推送、等待构建和部署。后续展示修订见 [CHANGES-2026-09-16.md](CHANGES-2026-09-16.md) 与 [VALIDATION.md](VALIDATION.md)：删除实验室指南后，当前生产检查为 52 个 HTML 页面、2 个 MathML 表达式、1 个图库页；正式文章现为 5 篇。新版已在桌面与 390px 手机尺寸核对排版、默认收起目录、导航和深浅外观背景。
+以下表格保留 2026-09-16 首次上线的本地及线上验收记录，表内页面、公式与文章数量是当时的结果。首次上线提交为 `d054d61`，通过 `./scripts/blog publish` 执行推送、等待构建和部署。后续排版修订见 [CHANGES-2026-09-16.md](CHANGES-2026-09-16.md)；本轮分区、头像、全文背景与颜色修订见 [CHANGES-2026-09-16-followup.md](CHANGES-2026-09-16-followup.md)。当前内容为 4 篇正式文章和 1 篇草稿，最新检查记录以本轮说明及 [VALIDATION.md](VALIDATION.md) 为准。
 
-| 验收项 | 当前证据或状态 |
+| 验收项 | 首次上线证据或状态 |
 | --- | --- |
 | 主题 tag 与 Hugo 版本兼容 | 已检查 v3.6.0 源码、最低版本说明和主题 CI；本机 Hugo 0.165.0 存在。 |
 | 原生 MathML 模板 | 独立临时站和正式生产构建均通过；正式输出检测到 2 个 `<math>`。 |

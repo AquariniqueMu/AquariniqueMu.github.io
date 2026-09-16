@@ -1,1 +1,15 @@
-<article class="home-page max-w-full"><section class="w-full">{{ .Content }}</section></article>
+<article class="home-page max-w-full">
+  <section class="home-profile" aria-label="About Junwen">
+    {{ with resources.Get "img/avatar-graded.png" }}
+      {{ $avatar := .Resize "320x webp q85" }}
+      <img class="profile-avatar" src="{{ $avatar.RelPermalink }}" width="{{ $avatar.Width }}" height="{{ $avatar.Height }}" alt="Junwen's avatar: a sleeping white dog" fetchpriority="high" decoding="async">
+    {{ end }}
+    <h1>{{ site.Params.author.name }}</h1>
+    <p class="home-description">{{ range $index, $line := split .Params.intro "\n" }}{{ if $index }}<br class="wide-break"> {{ end }}{{ $line }}{{ end }}</p>
+    <nav class="profile-links" aria-label="Junwen's links">
+      <a href="https://github.com/AquariniqueMu" aria-label="Junwen on GitHub" title="GitHub">{{ partial "icon.html" "github" }}<span>GitHub</span></a>
+      <a href="{{ site.BaseURL }}" aria-label="Junwen'Log blog" title="Blog">{{ partial "icon.html" "link" }}<span>Blog</span></a>
+    </nav>
+  </section>
+  <section class="w-full">{{ .Content }}</section>
+</article>

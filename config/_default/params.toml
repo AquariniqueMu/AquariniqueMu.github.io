@@ -6,7 +6,7 @@ enableCodeCopy = true
 enableStyledScrollbar = false
 disableImageOptimization = false
 disableImageZoom = true
-mainSections = ["posts", "notes", "travel"]
+mainSections = ["tech", "notes", "daily"]
 highlightCurrentMenuArea = true
 smartTOC = false
 [header]
@@ -22,7 +22,7 @@ smartTOC = false
   showRecent = true
   showRecentItems = 5
   showMoreLink = true
-  showMoreLinkDest = "/archives/"
+  showMoreLinkDest = "/posts/"
   cardView = false
 [article]
   showDate = true

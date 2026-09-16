@@ -3,17 +3,25 @@
   pageRef = "posts"
   weight = 10
 [[main]]
-  name = "Archive"
-  pageRef = "archives"
+  name = "Tech"
+  pageRef = "tech"
   weight = 20
 [[main]]
-  name = "Gallery"
-  pageRef = "travel"
+  name = "Notes"
+  pageRef = "notes"
   weight = 30
+[[main]]
+  name = "Daily"
+  pageRef = "daily"
+  weight = 40
 [[main]]
   name = "Tags"
   pageRef = "tags"
-  weight = 40
+  weight = 50
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 60
 [[footer]]
   name = "About"
   pageRef = "about"

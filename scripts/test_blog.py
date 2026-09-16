@@ -4,6 +4,7 @@ import contextlib
 import datetime
 import io
 from pathlib import Path
+import socket
 import subprocess
 import tempfile
 import unittest
@@ -56,27 +57,77 @@ class WritingToolsTests(unittest.TestCase):
         self.assertEqual(datetime.datetime.fromisoformat(date).utcoffset(), datetime.timedelta(hours=8))
         self.assertEqual(path.name, "index.md")
 
+    def test_section_paths_support_new_navigation(self):
+        for section in ("tech", "notes", "daily"):
+            path = blog.new_draft(section, "Example", "example")
+            self.assertEqual(path, self.root / "content" / section / "example/index.md")
+            self.assertEqual(blog.article_path(str(path)), path)
+        for old_section in ("posts", "travel"):
+            with self.assertRaisesRegex(blog.BlogError, "tech, notes, or daily"):
+                blog.new_draft(old_section, "Wrong section", "wrong-section")
+        aggregate_article = self.root / "content/posts/example/index.md"
+        aggregate_article.parent.mkdir(parents=True)
+        aggregate_article.write_text("---\ndraft: true\n---\n")
+        with self.assertRaisesRegex(blog.BlogError, "content/tech"):
+            blog.article_path(str(aggregate_article))
+
+    def test_gui_offers_current_writing_sections(self):
+        with patch.object(blog, "choose", return_value="Daily · daily") as choose, \
+             patch.object(blog, "ask", side_effect=["日常见闻", "a-daily-note"]), \
+             patch.object(blog, "open_editor") as editor:
+            blog.gui("new")
+        self.assertEqual(choose.call_args.args[1], ["Tech · tech", "Notes · notes", "Daily · daily"])
+        draft = self.root / "content/daily/a-daily-note/index.md"
+        editor.assert_called_once_with(draft)
+        self.assertIn("contentLanguage: zh-CN", draft.read_text())
+
+    def test_preview_port_check_allows_recently_closed_connections(self):
+        with socket.socket() as previous:
+            previous.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            previous.bind(("127.0.0.1", 0))
+            port = previous.getsockname()[1]
+            previous.listen()
+            with socket.create_connection(("127.0.0.1", port), timeout=2) as client:
+                connection, _ = previous.accept()
+                with connection:
+                    connection.shutdown(socket.SHUT_WR)
+                    self.assertEqual(client.recv(1), b"")
+                # The server initiates the close so its local port enters TIME_WAIT.
+        blog.check_preview_port_available(port)
+
+    def test_preview_port_check_preserves_existing_listener(self):
+        with socket.socket() as listener:
+            listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            listener.bind(("127.0.0.1", 0))
+            port = listener.getsockname()[1]
+            listener.listen()
+            with self.assertRaisesRegex(blog.BlogError, "no process was stopped"):
+                blog.check_preview_port_available(port)
+            with socket.create_connection(("127.0.0.1", port), timeout=2):
+                connection, _ = listener.accept()
+                connection.close()
+
     def test_invalid_slug_and_existing_draft_are_preserved(self):
         for slug in ("../escape", "中文", "Bad-Slug", "two--hyphens", "-leading", "a/b"):
             with self.assertRaises(blog.BlogError):
-                blog.new_draft("posts", "Title", slug)
-        path = blog.new_draft("posts", "First title", "existing")
+                blog.new_draft("tech", "Title", slug)
+        path = blog.new_draft("tech", "First title", "existing")
         original = path.read_bytes()
         with self.assertRaises(blog.BlogError):
-            blog.new_draft("posts", "Replacement", "existing")
+            blog.new_draft("tech", "Replacement", "existing")
         self.assertEqual(path.read_bytes(), original)
 
     def test_allowlist_excludes_private_editor_and_secret_files(self):
         for path in (".env", "content/.obsidian/app.json", "content/private/note.md", "static/key.pem",
                      "scripts/__pycache__/blog.pyc", "docs/credentials.json", "../README.md"):
             self.assertFalse(blog.allowed_path(path), path)
-        for path in ("content/posts/a/index.md", "static/image.jpg", "scripts/blog.py",
+        for path in ("content/tech/a/index.md", "static/image.jpg", "scripts/blog.py",
                      ".github/workflows/hugo.yml", ".gitignore", "themes/blowfish"):
             self.assertTrue(blog.allowed_path(path), path)
 
     def test_failed_build_restores_only_selected_draft(self):
         self.init_repo()
-        selected = blog.new_draft("posts", "Selected", "selected")
+        selected = blog.new_draft("tech", "Selected", "selected")
         other = blog.new_draft("notes", "Other", "other")
         original, other_original = selected.read_bytes(), other.read_bytes()
         with patch.object(blog, "check", side_effect=blog.BlogError("test build failure")):
@@ -88,7 +139,7 @@ class WritingToolsTests(unittest.TestCase):
 
     def test_publish_explicit_draft_to_local_remote(self):
         remote = self.init_repo()
-        selected = blog.new_draft("posts", "Selected", "selected")
+        selected = blog.new_draft("tech", "Selected", "selected")
         other = blog.new_draft("notes", "Other", "other")
         secret = self.root / "content/.obsidian"
         secret.mkdir()
@@ -105,7 +156,7 @@ class WritingToolsTests(unittest.TestCase):
 
     def test_rebase_conflict_is_aborted_without_pushing(self):
         remote = self.init_repo()
-        article = blog.new_draft("posts", "Example", "example")
+        article = blog.new_draft("tech", "Example", "example")
         self.git("add", "content")
         self.git("commit", "-m", "Add example")
         self.git("push")
@@ -113,7 +164,7 @@ class WritingToolsTests(unittest.TestCase):
         self.git("clone", str(remote), str(peer))
         self.git("config", "user.name", "Peer", cwd=peer)
         self.git("config", "user.email", "peer@example.invalid", cwd=peer)
-        peer_file = peer / "content/posts/example/index.md"
+        peer_file = peer / "content/tech/example/index.md"
         peer_file.write_text(peer_file.read_text().replace("Start with the idea", "Remote replaces the idea"))
         self.git("add", "content", cwd=peer)
         self.git("commit", "-m", "Peer edit", cwd=peer)

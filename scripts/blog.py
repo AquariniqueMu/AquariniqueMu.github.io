@@ -24,7 +24,7 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
 STATE = ROOT / ".local"
-SECTIONS = {"posts": "Technology", "notes": "Reading Notes", "travel": "Travel"}
+SECTIONS = {"tech": "Tech", "notes": "Notes", "daily": "Daily"}
 PREVIEW_URL = "http://localhost:1313/"
 SHANGHAI = dt.timezone(dt.timedelta(hours=8), "Asia/Shanghai")
 SLUG_RE = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
@@ -78,7 +78,7 @@ def suggest_slug(title):
 def new_draft(section, title, slug, language="en"):
     title = title.strip()
     if section not in SECTIONS:
-        raise BlogError("Section must be posts, notes, or travel.")
+        raise BlogError("Section must be tech, notes, or daily. Posts lists all articles; create technical articles in tech.")
     if not title or len(title) > 200 or any(ord(c) < 32 for c in title):
         raise BlogError("Use a nonempty, single-line title (up to 200 characters).")
     if not SLUG_RE.fullmatch(slug) or len(slug) > 90:
@@ -127,7 +127,7 @@ def article_path(value):
     except ValueError:
         raise BlogError("Choose an article inside this site's content directory.")
     if len(rel.parts) != 3 or rel.parts[0] not in SECTIONS or rel.name != "index.md" or not path.is_file():
-        raise BlogError("Choose a page bundle's index.md under content/posts, content/notes or content/travel.")
+        raise BlogError("Choose a page bundle's index.md under content/tech, content/notes or content/daily.")
     if not SLUG_RE.fullmatch(rel.parts[1]):
         raise BlogError("Article folder names must be lowercase English slugs.")
     return path
@@ -159,6 +159,17 @@ def preview_process():
     return None
 
 
+def check_preview_port_available(port=1313):
+    with socket.socket() as sock:
+        # A stopped Hugo server may leave accepted connections in TIME_WAIT.
+        # Like Hugo's listener, permit their reuse without sharing a live port.
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        try:
+            sock.bind(("127.0.0.1", port))
+        except OSError:
+            raise BlogError(f"Port {port} is being used by another process. Close it first; no process was stopped.")
+
+
 def preview(open_browser=True):
     STATE.mkdir(exist_ok=True)
     if preview_process():
@@ -166,11 +177,7 @@ def preview(open_browser=True):
         if open_browser:
             run(["/usr/bin/open", PREVIEW_URL])
         return
-    with socket.socket() as sock:
-        try:
-            sock.bind(("127.0.0.1", 1313))
-        except OSError:
-            raise BlogError("Port 1313 is being used by another process. Close it first; no process was stopped.")
+    check_preview_port_available()
     log_path = STATE / "preview.log"
     with log_path.open("w") as log:
         process = subprocess.Popen([
@@ -427,7 +434,8 @@ def main():
     parser = argparse.ArgumentParser(description="Junwen'Log · write locally, publish with confidence")
     commands = parser.add_subparsers(dest="command", required=True)
     new = commands.add_parser("new", help="Create a page-bundle draft")
-    new.add_argument("section", choices=SECTIONS)
+    new.add_argument("section", choices=SECTIONS,
+                     help="tech: technical articles; notes: notes of any kind; daily: everyday life and travel")
     new.add_argument("title")
     new.add_argument("--slug", required=True)
     new.add_argument("--language", choices=["en", "zh-CN"], default="en")

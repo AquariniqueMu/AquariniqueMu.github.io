@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "Junwen's personal notebook on technology, books, and places."
+description: "Junwen's personal notebook on technology, notes, and everyday life."
 showDate: false
 showDateUpdated: false
 showReadingTime: false
@@ -12,13 +12,13 @@ showTaxonomies: false
 ---
 Hi, I'm Junwen.
 
-This is my personal notebook: a home for technical discoveries, reading notes, and journeys recorded in words and photographs.
+This is my personal notebook: a home for technical discoveries, notes of every kind, and daily life recorded in words and photographs.
 
 ## Three shelves
 
-- **[Technology](/posts/)** — code, tools, systems, and lessons from making things work.
-- **[Reading & notes](/notes/)** — books, ideas, and longer reflections.
-- **[Travel](/travel/)** — places visited, details noticed, and photographs worth keeping.
+- **[Tech](/tech/)** — code, tools, systems, and lessons from making things work.
+- **[Notes](/notes/)** — reading, study, ideas, and longer reflections.
+- **[Daily](/daily/)** — everyday life, travels, and photographs worth keeping.
 
 The interface is in English; the writing may be in English or Chinese. Older notes remain here as a record of what I was learning at the time.
 

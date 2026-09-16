@@ -10,7 +10,7 @@
 
 | 应用 | 操作 |
 | --- | --- |
-| **New Draft** | 选择 Technology / Reading Notes / Travel，输入标题和英文链接名，创建草稿并在 Obsidian 打开。 |
+| **New Draft** | 选择 Tech / Notes / Daily，输入标题和英文链接名，创建草稿并在 Obsidian 打开。 |
 | **Open Writing Vault** | 打开博客的 Obsidian 写作库。 |
 | **Preview** | 启动本地预览并打开浏览器；包括草稿，保存文章后自动刷新。 |
 | **Publish** | 选择一篇草稿发布，或只发布已保存的网站修改；自动验证、提交、同步、推送，并等待 GitHub Pages。 |
@@ -53,7 +53,7 @@ cd /Users/junwenyang/Developer/Projects/junwen-log
 
 ## 4. 文章、目录和图片
 
-**封面背景：** 把静态照片命名为 `feature.jpg`（也可用 PNG/WebP）放在文章 bundle，或在 front matter 写 `featureimage: cover.jpg`，即可作为按原比例显示的淡化背景。没有封面的文章保持纯色底；背景不占正文空间。透明度在 `assets/css/custom.css` 的 `.article-backdrop img` 中调整。
+**封面背景：** 把静态照片命名为 `feature.jpg`（也可用 PNG/WebP）放在文章 bundle，或在 front matter 写 `featureimage: cover.jpg`，即可作为整个文章页面的淡化背景，覆盖导航下方和正文两侧。图片保持原比例铺满视口，可能裁剪边缘；浅色不透明度 10%、深色 8%。没有封面的文章保持纯色底；背景不占正文空间。透明度在 `assets/css/custom.css` 的 `.article-backdrop img` 中调整。
 
 **文章目录：** 技术文章的目录默认在正文上方收起，点击 **Table of Contents** 展开。目录由 Markdown 标题自动生成，不必再手写。需要单篇控制时写 `showTableOfContents: true` 或 `false`。
 
@@ -61,14 +61,14 @@ cd /Users/junwenyang/Developer/Projects/junwen-log
 
 ```text
 content/
-  posts/learning-rust/index.md
-  posts/learning-rust/diagram.png
+  tech/learning-rust/index.md
+  tech/learning-rust/diagram.png
   notes/a-book-worth-remembering/index.md
-  travel/a-weekend-in-hangzhou/index.md
-  travel/a-weekend-in-hangzhou/lake.jpg
+  daily/a-weekend-in-hangzhou/index.md
+  daily/a-weekend-in-hangzhou/lake.jpg
 ```
 
-分区含义：`posts` 技术文章，`notes` 读书笔记，`travel` 游记。标题和正文可以写中文，文件夹使用英文小写、数字和短横线；发布后尽量不改文件夹名称，否则网址会变。
+分区含义：`tech` 技术文章，`notes` 所有类型的笔记（包括读书、学习、随想），`daily` 日常生活和游记。导航中的 **Posts** 汇总三个分区的已发布文章，按时间倒序展示；`content/posts/_index.md` 只是汇总页，不在此目录新建文章。标题和正文可以写中文，文件夹使用英文小写、数字和短横线；发布后尽量不改文件夹名称，否则网址会变。
 
 新建稿件已经包含以下 front matter：
 
@@ -114,14 +114,14 @@ $$
 cd /Users/junwenyang/Developer/Projects/junwen-log
 
 # 新建英文技术草稿，自动打开 Obsidian
-./scripts/blog new posts "Learning Rust" --slug learning-rust --open
+./scripts/blog new tech "Learning Rust" --slug learning-rust --open
 
 # 新建中文读书草稿
 ./scripts/blog new notes "读书：一个值得反复思考的问题" \
   --slug a-question-to-revisit --language zh-CN --open
 
 # 新建后直接使用 MWeb
-./scripts/blog new travel "A Weekend in Hangzhou" \
+./scripts/blog new daily "A Weekend in Hangzhou" \
   --slug a-weekend-in-hangzhou --open --editor mweb
 
 # 启动后台预览（关闭 Terminal 后仍继续运行）
@@ -150,6 +150,8 @@ cd /Users/junwenyang/Developer/Projects/junwen-log
 ./scripts/blog open
 ./scripts/blog gui new
 ```
+
+新建命令只接受 `tech`、`notes`、`daily`；旧的 `posts`、`travel` 参数不再用于写作。macOS 启动器调用实时脚本，现有 **New Draft** 会直接显示新分区，无需重装。
 
 `new` 不覆盖已有目录，拒绝路径穿越、不合规 slug 和空标题。所有稿件创建时都设置 `draft: true`。GUI 会根据标题是否含汉字选择初始语言；之后可直接修改 `contentLanguage`。
 

@@ -16,9 +16,9 @@ buildFuture = false
   tag = "tags"
   series = "series"
 [permalinks.page]
-  posts = "/posts/:year/:month/:day/:slug/"
+  tech = "/posts/:year/:month/:day/:slug/"
   notes = "/notes/:year/:month/:slug/"
-  travel = "/travel/:year/:month/:slug/"
+  daily = "/daily/:year/:month/:slug/"
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 [frontmatter]

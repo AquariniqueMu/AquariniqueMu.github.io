@@ -7,6 +7,7 @@ date: "2022-04-17"
 slug: "tangyao-garden-yangxie"
 contentLanguage: "zh-CN"
 aliases:
+  - "/travel/2022/04/tangyao-garden-yangxie/"
   - "/posts/光影集洪洞羊獬唐尧故园/"
 draft: false
 resources:

@@ -1,6 +1,6 @@
 ---
-title: "Notes"
-description: "Notes on books, study, ideas, and anything worth understanding."
+title: "Tech"
+description: "Code, systems, and ideas made practical."
 cardView: false
 groupByYear: true
 showSummary: true
@@ -10,4 +10,4 @@ cascade:
     hideFeatureImage: true
     showTableOfContents: true
 ---
-Reading notes, study notes, and reflections of every kind.
+Working notes on code, tools, and the ideas behind them.

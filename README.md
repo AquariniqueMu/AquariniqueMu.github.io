@@ -1,6 +1,6 @@
 # Junwen'Log
 
-A personal notebook on **technology, books, and places**, built with Hugo and Blowfish. Navigation and site information are in English; articles can be written in English or Chinese.
+A personal notebook on **technology, notes, and everyday life**, built with Hugo and Blowfish. Navigation and site information are in English; articles can be written in English or Chinese.
 
 - Website: [aquariniquemu.github.io](https://aquariniquemu.github.io/)
 - Source: [AquariniqueMu/AquariniqueMu.github.io](https://github.com/AquariniqueMu/AquariniqueMu.github.io)
@@ -8,6 +8,7 @@ A personal notebook on **technology, books, and places**, built with Hugo and Bl
 - [Implementation guide / 完整实施文档](docs/IMPLEMENTATION.md)
 - [Legacy migration record](docs/MIGRATION.md)
 - [Typography and navigation update](docs/CHANGES-2026-09-16.md)
+- [Sections, profile, and page background update](docs/CHANGES-2026-09-16-followup.md)
 
 ## Stack
 
@@ -22,7 +23,7 @@ A personal notebook on **technology, books, and places**, built with Hugo and Bl
 | Publishing | GitHub Actions → GitHub Pages |
 | Writing | Obsidian content vault, optional MWeb, macOS launchers and a Python CLI |
 
-The source includes four previously published articles, their local images, one preserved draft, and a new English introduction. Historical Chinese titles and publication dates are retained. Retained old article URLs have aliases to their new canonical URLs. The lab-server guide was removed at the author's request. Five historical downloadable attachments were already missing; their exact names and recovery instructions are recorded in [MIGRATION.md](docs/MIGRATION.md).
+The source includes four previously published articles, their local images, and one preserved draft. Historical Chinese titles and publication dates are retained. Retained old article URLs have aliases to their new canonical URLs. The lab-server guide and the introductory sample article were removed at the author's request. Five historical downloadable attachments were already missing; their exact names and recovery instructions are recorded in [MIGRATION.md](docs/MIGRATION.md).
 
 ## Local setup
 
@@ -49,7 +50,7 @@ Preview runs at [localhost:1313](http://localhost:1313/) and includes drafts and
 Create an English draft:
 
 ```sh
-./scripts/blog new posts "An idea worth keeping" --slug an-idea-worth-keeping --open
+./scripts/blog new tech "An idea worth keeping" --slug an-idea-worth-keeping --open
 ```
 
 Create a Chinese note while retaining an English URL:
@@ -78,12 +79,15 @@ Publishing includes other saved changes in the permitted site directories. Revie
 
 ```text
 content/
-├── posts/<english-slug>/index.md   # Technology
-├── notes/<english-slug>/index.md   # Reading and reflections
-├── travel/<english-slug>/index.md  # Travel and photography
+├── tech/<english-slug>/index.md    # Technical articles
+├── notes/<english-slug>/index.md   # Notes of any kind
+├── daily/<english-slug>/index.md   # Everyday life and travel
+├── posts/_index.md                # All published articles, newest first
 ├── about/index.md
 └── archives/_index.md
 ```
+
+The navigation is **Posts · Tech · Notes · Daily · Tags · About**. Posts aggregates all three writing sections in reverse chronological order. Create articles in `tech`, `notes`, or `daily`; `posts` is the aggregate page, not a writing folder.
 
 Keep an article and its images in the same page bundle. Use ordinary Markdown links rather than Obsidian wiki links. Use `contentLanguage: zh-CN` for Chinese articles. The interface stays English; `hasCJKLanguage = true` enables appropriate CJK word counting.
 

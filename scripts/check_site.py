@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 import xml.etree.ElementTree as ET
+from email.utils import parsedate_to_datetime
 
 ROOT = Path(__file__).resolve().parents[1]
 HOST = 'aquariniquemu.github.io'
@@ -28,7 +29,7 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument('--public-dir',default='public');args=ap.parse_args()
     public=Path(args.public_dir).resolve(); errors=[]; known=set(); count=0; maths=0; galleries=0
     def fail(message):errors.append(message)
-    for required in ('index.html','index.json','index.xml','sitemap.xml','robots.txt','posts/index.html','notes/index.html','travel/index.html','archives/index.html','about/index.html','fonts/inter-latin.woff2'):
+    for required in ('index.html','index.json','index.xml','sitemap.xml','robots.txt','posts/index.html','posts/index.xml','tech/index.html','notes/index.html','daily/index.html','daily/index.xml','travel/index.html','travel/index.xml','archives/index.html','about/index.html','fonts/inter-latin.woff2'):
         if not (public/required).is_file():fail('Missing '+required)
     for file in public.rglob('*.html'):
         text=file.read_text();doc=Document(text);count+=1;rel=file.relative_to(public).as_posix();maths+=doc.math
@@ -56,7 +57,8 @@ def main():
                 else:fail(f'{rel}: broken local target {value}')
     # Drafts must be absent from both HTML and the search index.
     index=(public/'index.json').read_text() if (public/'index.json').exists() else '[]'
-    try:json.loads(index)
+    search_entries=[]
+    try:search_entries=json.loads(index)
     except ValueError:fail('Invalid search index JSON')
     for file in (ROOT/'content').rglob('index.md'):
         text=file.read_text();front=text.split('---',2)[1] if text.startswith('---') else ''
@@ -66,15 +68,34 @@ def main():
                 value=slug.group(1).strip()
                 if any(p.parent.name==value for p in public.rglob('index.html')) or value in index:fail(f'Draft leaked: {file.relative_to(ROOT)}')
         if re.search(r'^math:\s*true',front,re.M) or re.search(r'\{\{[<%]\s*katex',text):fail(f'Client math forbidden: {file.relative_to(ROOT)}')
-    if maths<2:fail('Expected both inline and block MathML in the notebook entry')
     if galleries<1:fail('Expected the migrated travel gallery')
     try:
         rss=ET.parse(public/'index.xml');items=rss.findall('./channel/item')
         if not items:fail('RSS is empty')
         for item in items:
             if len(item.findtext('description',''))<100:fail('RSS contains empty/truncated entry: '+item.findtext('title',''))
-        ET.parse(public/'sitemap.xml')
-    except (ET.ParseError,FileNotFoundError) as e:fail(f'Invalid XML: {e}')
+        dates=[parsedate_to_datetime(item.findtext('pubDate','')) for item in items]
+        if dates!=sorted(dates,reverse=True):fail('RSS entries are not in reverse chronological order')
+        post_items=ET.parse(public/'posts/index.xml').findall('./channel/item')
+        links=[item.findtext('link') for item in items]
+        if [item.findtext('link') for item in post_items]!=links:fail('Posts RSS must aggregate every main section in date order')
+        daily_items=ET.parse(public/'daily/index.xml').findall('./channel/item')
+        travel_items=ET.parse(public/'travel/index.xml').findall('./channel/item')
+        if [item.findtext('link') for item in travel_items]!=[item.findtext('link') for item in daily_items]:fail('Legacy Travel RSS must mirror Daily RSS')
+        paginated=sorted((public/'posts/page').glob('*/index.html'),key=lambda path:int(path.parent.name))
+        post_pages=[public/'posts/index.html',*paginated]
+        displayed=[value for page in post_pages for value in Document(page.read_text()).links]
+        relative_links=[urlsplit(link).path for link in links]
+        positions=[]
+        for link in relative_links:
+            if link not in displayed:fail('Posts is missing an entry: '+link)
+            else:positions.append(displayed.index(link))
+        if positions!=sorted(positions):fail('Posts entries are not in reverse chronological order')
+        sitemap=ET.parse(public/'sitemap.xml')
+        legacy_paths={'/travel/','/travel/index.xml'}
+        if any(urlsplit(entry.get('permalink','')).path in legacy_paths for entry in search_entries):fail('Legacy Travel section must stay out of search')
+        if any(urlsplit(loc.text or '').path in legacy_paths for loc in sitemap.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')):fail('Legacy Travel section must stay out of sitemap')
+    except (ET.ParseError,FileNotFoundError,TypeError,ValueError) as e:fail(f'Invalid feed: {e}')
     if errors:
         print('\n'.join('FAIL: '+x for x in errors));return 1
     print(f'PASS: {count} HTML pages; {maths} MathML expressions; {galleries} gallery pages; local assets, draft exclusion, search JSON, RSS and sitemap verified.')

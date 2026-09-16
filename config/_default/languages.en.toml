@@ -6,7 +6,7 @@ title = "Junwen'Log"
   displayName = "EN"
   isoCode = "en"
   dateFormat = "2 January 2006"
-  description = "Notes on technology, books, and places. A personal notebook by Junwen, written in English and Chinese."
+  description = "Technology, notes, and everyday life. A personal notebook by Junwen, written in English and Chinese."
 [params.author]
   name = "Junwen"
   links = [{ github = "https://github.com/AquariniqueMu" }, { rss = "/index.xml" }]
