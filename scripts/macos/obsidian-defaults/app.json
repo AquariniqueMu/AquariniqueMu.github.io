@@ -1,0 +1,12 @@
+{
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "attachmentFolderPath": "./",
+  "showLineNumber": false,
+  "readableLineLength": true,
+  "spellcheck": true,
+  "strictLineBreaks": false,
+  "propertiesInDocument": "visible",
+  "promptDelete": true
+}

@@ -1,0 +1,7 @@
+{{ define "main" }}
+<header class="mb-10"><h1 class="text-4xl font-extrabold">{{ .Title }}</h1><p class="mt-4 text-neutral-500">{{ .Description }}</p></header>
+{{ range (where site.RegularPages "Section" "in" site.Params.mainSections).GroupByDate "2006" }}
+<h2 class="mt-12 mb-5 text-2xl font-semibold">{{ .Key }}</h2>
+<section>{{ range .Pages }}{{ partial "article-link/simple.html" . }}{{ end }}</section>
+{{ end }}
+{{ end }}

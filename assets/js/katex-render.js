@@ -1,0 +1,1 @@
+/* Mathematics is rendered to native MathML at build time. */

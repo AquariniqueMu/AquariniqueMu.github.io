@@ -1,0 +1,4 @@
+{{ with .Resources.GetMatch "*feature*" }}
+{{ $img := .Resize (printf "%dx webp q82" (int (math.Min 1280 .Width))) }}
+<div class="overflow-hidden h-36 md:h-56 lg:h-72"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $.Title }}" loading="eager" decoding="async" fetchpriority="high" class="w-full h-full nozoom object-cover"></div>
+{{ end }}

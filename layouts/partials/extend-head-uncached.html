@@ -1,0 +1,8 @@
+{{ if .HasShortcode "photo-gallery" }}
+  {{ $css := resources.Get "lib/glightbox.min.css" | minify | fingerprint }}
+  {{ $js := resources.Get "lib/glightbox.min.js" | fingerprint }}
+  {{ $init := resources.Get "js/gallery-init.js" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+  <script src="{{ $init.RelPermalink }}" integrity="{{ $init.Data.Integrity }}" defer></script>
+{{ end }}

@@ -1,0 +1,38 @@
+baseURL = "https://aquariniquemu.github.io/"
+title = "Junwen'Log"
+theme = "blowfish"
+defaultContentLanguage = "en"
+locale = "en-US"
+hasCJKLanguage = true
+enableRobotsTXT = true
+enableEmoji = true
+enableGitInfo = true
+summaryLength = 40
+buildDrafts = false
+buildFuture = false
+[pagination]
+  pagerSize = 10
+[taxonomies]
+  tag = "tags"
+  series = "series"
+[permalinks.page]
+  posts = "/posts/:year/:month/:day/:slug/"
+  notes = "/notes/:year/:month/:slug/"
+  travel = "/travel/:year/:month/:slug/"
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+[frontmatter]
+  lastmod = ["lastmod", ":git", "date"]
+[imaging]
+  quality = 82
+  resampleFilter = "Lanczos"
+[caches.images]
+  dir = ":resourceDir/_gen"
+  maxAge = "720h"
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = true
+  [[related.indices]]
+    name = "tags"
+    weight = 100

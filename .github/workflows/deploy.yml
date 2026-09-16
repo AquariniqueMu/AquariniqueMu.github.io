@@ -1,0 +1,69 @@
+name: Deploy Junwen Log
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  HUGO_VERSION: '0.165.0'
+  TZ: Asia/Shanghai
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Install pinned Hugo extended
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          release="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}"
+          curl -fsSLO "${release}/${archive}"
+          curl -fsSLO "${release}/hugo_${HUGO_VERSION}_checksums.txt"
+          grep " ${archive}$" "hugo_${HUGO_VERSION}_checksums.txt" | sha256sum --check
+          tar -xzf "${archive}" hugo
+          sudo install hugo /usr/local/bin/hugo
+          rm "${archive}" "hugo_${HUGO_VERSION}_checksums.txt" hugo
+          hugo version
+      - uses: actions/cache@v4
+        with:
+          path: resources/_gen
+          key: hugo-0.165.0-${{ runner.os }}-${{ hashFiles('content/**', 'assets/**', 'layouts/**', 'config/**') }}
+          restore-keys: hugo-0.165.0-${{ runner.os }}-
+      - name: Configure Pages
+        if: github.event_name != 'pull_request'
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build production site
+        env:
+          HUGO_ENVIRONMENT: production
+          PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
+        run: hugo --gc --minify --cleanDestinationDir --baseURL "${PAGES_BASE_URL:-https://aquariniquemu.github.io}/"
+      - name: Verify output
+        run: python3 scripts/check_site.py --public-dir public
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          path: public
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

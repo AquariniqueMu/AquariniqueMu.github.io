@@ -1,0 +1,27 @@
+{{- $url := urls.Parse .Destination -}}
+{{- $path := strings.TrimPrefix "./" (path.Clean (urls.PathUnescape $url.Path)) -}}
+{{- $img := or (.PageInner.Resources.Get $path) (resources.Get (strings.TrimPrefix "/" $path)) -}}
+{{- if not $img -}}
+  {{- errorf "Image must be a local page resource: %s (%s)" .Destination .Position -}}
+{{- else -}}
+  {{- $src := $img.RelPermalink -}}
+  {{- $w := 0 -}}{{- $h := 0 -}}
+  {{- if eq $img.MediaType.SubType "svg" -}}
+    {{- $box := findRESubmatch `viewBox=["'][-0-9.]+[ ,]+[-0-9.]+[ ,]+([0-9.]+)[ ,]+([0-9.]+)["']` $img.Content -}}
+    {{- if $box -}}{{- $w = index (index $box 0) 1 -}}{{- $h = index (index $box 0) 2 -}}
+    {{- else -}}{{- errorf "SVG requires a numeric viewBox: %s" .Destination -}}{{- end -}}
+  {{- else -}}{{- $w = $img.Width -}}{{- $h = $img.Height -}}{{- end -}}
+  {{- $set := slice -}}
+  {{- if not (in (slice "svg" "gif") $img.MediaType.SubType) -}}
+    {{- $main := $img.Resize (printf "%dx webp q82" (int (math.Min 1280 $img.Width))) -}}
+    {{- $src = $main.RelPermalink -}}{{- $w = $main.Width -}}{{- $h = $main.Height -}}
+    {{- range slice 480 800 1280 -}}
+      {{- if lt . $w -}}{{- $variant := $img.Resize (printf "%dx webp q82" .) -}}{{- $set = $set | append (printf "%s %dw" $variant.RelPermalink $variant.Width) -}}{{- end -}}
+    {{- end -}}
+    {{- $set = $set | append (printf "%s %dw" $src $w) -}}
+  {{- end -}}
+  <figure class="note-figure">
+    <img src="{{ $src }}"{{ with $set }} srcset="{{ delimit . ", " }}" sizes="(max-width: 720px) calc(100vw - 48px), 680px"{{ end }} width="{{ $w }}" height="{{ $h }}" alt="{{ .Text | plainify }}" loading="lazy" decoding="async">
+    {{- with .Title }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
+  </figure>
+{{- end -}}

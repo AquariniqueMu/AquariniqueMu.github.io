@@ -1,0 +1,17 @@
+{{- $match := .Get "match" | default "images/*" -}}
+{{- $cols := int (.Get "cols" | default 3) -}}
+{{- $ratio := .Get "ratio" | default "4/3" -}}
+{{- if not (in (slice 2 3 4) $cols) -}}{{- errorf "photo-gallery cols must be 2, 3 or 4" -}}{{- end -}}
+{{- if not (in (slice "1/1" "4/3" "3/2" "16/9") $ratio) -}}{{- errorf "Unsupported photo-gallery ratio: %s" $ratio -}}{{- end -}}
+{{- $imgs := .Page.Resources.Match $match -}}
+{{- if not $imgs -}}{{- errorf "photo-gallery: no images matching %s in %s" $match .Position -}}{{- end -}}
+<div class="photo-gallery" style="--g-cols:{{ $cols }};--g-ratio:{{ $ratio | safeCSS }};">
+{{- range $imgs -}}
+  {{- if and (eq .ResourceType "image") (not (in (slice "svg" "gif") .MediaType.SubType)) -}}
+    {{- $thumb := .Resize (printf "%dx webp q80" (int (math.Min 600 .Width))) -}}
+    {{- $full := .Resize (printf "%dx webp q85" (int (math.Min 1800 .Width))) -}}
+    {{- $title := .Params.title | default (.Name | path.BaseName | humanize) -}}
+    <a class="photo-lightbox" href="{{ $full.RelPermalink }}" data-gallery="{{ $.Ordinal }}" data-title="{{ $title }}" aria-label="View photo: {{ $title }}"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="{{ $title }}" loading="lazy" decoding="async"></a>
+  {{- end -}}
+{{- end -}}
+</div>

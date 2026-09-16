@@ -1,0 +1,64 @@
+colorScheme = "github"
+defaultAppearance = "light"
+autoSwitchAppearance = true
+enableSearch = true
+enableCodeCopy = true
+enableStyledScrollbar = false
+disableImageOptimization = false
+disableImageZoom = true
+mainSections = ["posts", "notes", "travel"]
+highlightCurrentMenuArea = true
+smartTOC = true
+[header]
+  layout = "basic"
+[footer]
+  showMenu = true
+  showCopyright = true
+  showThemeAttribution = true
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+[homepage]
+  layout = "page"
+  showRecent = true
+  showRecentItems = 5
+  showMoreLink = true
+  showMoreLinkDest = "/archives/"
+  cardView = false
+[article]
+  showDate = true
+  showDateUpdated = true
+  showAuthor = false
+  showHero = false
+  heroStyle = "basic"
+  showBreadcrumbs = true
+  showDraftLabel = true
+  showEdit = false
+  showHeadingAnchors = true
+  showPagination = true
+  showReadingTime = true
+  showWordCount = true
+  showTableOfContents = true
+  showTaxonomies = true
+  showComments = false
+  showViews = false
+  showLikes = false
+  seriesOpened = false
+  showRelatedContent = true
+  relatedContentLimit = 3
+  sharingLinks = []
+[list]
+  showCards = false
+  cardView = false
+  groupByYear = true
+  showSummary = true
+  showTableOfContents = false
+  showHero = false
+[sitemap]
+  excludedKinds = []
+
+[giscus]
+  enabled = false
+  repo = "AquariniqueMu/AquariniqueMu.github.io"
+  repoId = "R_kgDONvLRqw"
+  category = "Announcements"
+  categoryId = "DIC_kwDONvLRq84DFteG"

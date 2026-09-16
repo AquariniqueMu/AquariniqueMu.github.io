@@ -1,0 +1,32 @@
+[[main]]
+  name = "Technology"
+  pageRef = "posts"
+  weight = 10
+[[main]]
+  name = "Reading"
+  pageRef = "notes"
+  weight = 20
+[[main]]
+  name = "Travel"
+  pageRef = "travel"
+  weight = 30
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 40
+[[footer]]
+  name = "All writing"
+  pageRef = "archives"
+  weight = 10
+[[footer]]
+  name = "Tags"
+  pageRef = "tags"
+  weight = 20
+[[footer]]
+  name = "RSS"
+  url = "/index.xml"
+  weight = 30
+[[footer]]
+  name = "GitHub"
+  url = "https://github.com/AquariniqueMu"
+  weight = 40

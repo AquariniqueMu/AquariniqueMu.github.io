@@ -1,0 +1,4 @@
+{{ if site.Params.giscus.enabled }}
+<section class="comments-section" aria-label="Comments"><h2>Conversation</h2><div class="giscus" data-repo="{{ site.Params.giscus.repo }}" data-repo-id="{{ site.Params.giscus.repoId }}" data-category="{{ site.Params.giscus.category }}" data-category-id="{{ site.Params.giscus.categoryId }}"></div></section>
+{{ $js := resources.Get "js/comments.js" | minify | fingerprint }}<script src="{{ $js.RelPermalink }}" defer></script>
+{{ end }}
