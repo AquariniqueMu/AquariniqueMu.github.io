@@ -4,7 +4,7 @@
 
 本文记录站点实际采用的架构、附件方案中经过源码核对的修正、迁移边界、部署方式和后续维护方法。日常写作请直接阅读 [WRITING.md](WRITING.md)；旧站文章与附件清单见 [MIGRATION.md](MIGRATION.md)。
 
-> 验收状态以第 10 节为准。代码与配置存在不等于 GitHub 已完成部署，也不等于线上性能已通过测量。本文编写阶段 GitHub 已完成登录，最终部署与公网验收仍由实施流程继续完成。
+> 已于 2026-09-16 完成部署和公网验收：[Junwen'Log](https://aquariniquemu.github.io/)。[首次部署运行记录](https://github.com/AquariniqueMu/AquariniqueMu.github.io/actions/runs/35057756195)显示 build 与 deploy 均成功。详细验收与已知限制见第 10 节。
 
 ## 1. 成品范围与设计取舍
 
@@ -351,7 +351,7 @@ git push origin main
 
 ## 10. 验收记录与未决事项
 
-下面区分已经完成的研究/迁移检查、当前实现，以及仍需最终验证的项目。上线后由实际执行结果更新本表。
+以下为 2026-09-16 实际完成的本地及线上验收。首次上线提交为 `d054d61`，通过 `./scripts/blog publish` 执行推送、等待构建和部署。
 
 | 验收项 | 当前证据或状态 |
 | --- | --- |
@@ -362,13 +362,14 @@ git push origin main
 | tags/series 替代旧 taxonomy | 独立有效配置输出只含 tags/series；正式配置已采用该设置。 |
 | 旧内容迁移 | 5 已发布 + 1 草稿保留，17 图片本地化，5 旧文章 alias 已核实。 |
 | 历史下载附件 | 5 个源文件尚缺，旧站也为 404；已列清单，等待作者找回原文件。 |
-| 默认英文、中文正文 | 配置与内容标记已建立，baseof 使用 contentLanguage 输出 html lang；生产检查验证语言属性存在，中文视觉排版仍需浏览器验收。 |
+| 默认英文、中文正文 | baseof 使用 contentLanguage 输出 html lang；生产检查及浏览器验证通过，中文搜索已测试。 |
 | 图片宽高与 WebP | 生产 HTML 检查通过：图片具备尺寸，或主题缩略图在固定空间内绝对定位；不据此声称实测 CLS 分数。 |
-| 图库仅按需加载 | 生产检查检测到 1 个图库页，HTML 中的图库与 GLightbox 资源条件一致；灯箱交互需浏览器验收。 |
+| 图库仅按需加载 | 生产检查检测到 1 个图库页，HTML 中的图库与 GLightbox 资源条件一致；手机灯箱交互已测试。 |
 | 正式构建和站点检查 | 已通过：60 个 HTML 页面、2 个 MathML 表达式、1 个图库页；站内资源目标、草稿排除、搜索 JSON、RSS 全文与 sitemap 校验通过。5 个既有缺失附件单独列入 allowlist，并在输出中提示。 |
 | Mac 写作启动器 | 四个应用已安装并完成编译/签名检查；Obsidian content 库已注册，CLI 打开具体文章已通过界面验证。 |
-| GitHub 登录、推送与部署 | 已登录，旧 main 历史和本地备份 tag 已保留；首次推送和实际 workflow 结果待记录。 |
-| 公网 HTTP、旧地址、RSS、搜索 | 待正式部署成功后检查。 |
+| 浏览器视觉与交互 | 桌面浅色/深色、390px 手机布局、中文搜索、手机灯箱已通过本地浏览器检查；该次检查未见控制台错误。 |
+| GitHub 登录、推送与部署 | 已保留完整 main 历史；备份 tag `backup-before-blowfish-2026-09-16` 已推送。Pages 切换为 workflow，首次运行 build 32 秒、deploy 11 秒，均成功。 |
+| 公网 HTTP、旧地址、RSS、搜索 | 首页、分区、archives、RSS、JSON、sitemap、robots 均 HTTP 200；5 个旧文章地址返回跳转 HTML；原 RAG draft 地址 HTTP 404，JSON 不含该稿；线上中文搜索“通信原理”能命中考研笔记。RSS 为 6 篇正式文章，按原始日期倒序。 |
 | Lighthouse / CLS / LCP | 未给出测量分数；正式上线后才能按确定设备、网络和缓存条件报告。 |
 | Giscus | 可选项，未启用，不影响基本博客发布。 |
 

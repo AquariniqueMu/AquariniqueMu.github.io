@@ -1,7 +1,7 @@
 # Junwen'Log 写作与发布手册
 
-本地项目：`/Users/junwenyang/Developer/Projects/junwen-log`  
-线上地址：[Junwen'Log](https://aquariniquemu.github.io/)  
+本地项目：`/Users/junwenyang/Developer/Projects/junwen-log`
+线上地址：[Junwen'Log](https://aquariniquemu.github.io/)
 推荐编辑器：已经安装的 Obsidian；MWeb 也可以直接编辑相同的 Markdown 文件。
 
 ## 1. 日常使用：新建 → 写作 → 预览 → 发布
