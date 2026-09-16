@@ -8,7 +8,7 @@ disableImageOptimization = false
 disableImageZoom = true
 mainSections = ["posts", "notes", "travel"]
 highlightCurrentMenuArea = true
-smartTOC = true
+smartTOC = false
 [header]
   layout = "basic"
 [footer]

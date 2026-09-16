@@ -1,0 +1,6 @@
+<details class="notebook-toc print:hidden" id="TOCView">
+  <summary>{{ i18n "article.table_of_contents" }}</summary>
+  <div class="notebook-toc-content">
+    {{ replace (.TableOfContents | emojify) `id="TableOfContents"` (printf `id="TableOfContents" aria-label="%s"` (i18n "article.table_of_contents")) | safeHTML }}
+  </div>
+</details>

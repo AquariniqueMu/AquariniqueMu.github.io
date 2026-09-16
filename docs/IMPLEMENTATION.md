@@ -16,11 +16,13 @@
 | --- | --- | --- |
 | Technology | `/posts/` | 按年份分组的文字列表，隐藏封面，文章显示目录 |
 | Reading & notes | `/notes/` | 文字列表，适合读书笔记和长篇反思；可用 series 组织连续笔记 |
-| Travel | `/travel/` | 封面卡片，文章可显示题图和按需灯箱 |
+| Travel | `/travel/` | 封面卡片，文章封面作为淡化背景，并按需加载灯箱 |
 | About | `/about/` | 简短真实介绍，不编造个人经历 |
-| All writing | `/archives/` | 跨三个分区的文章时间线 |
+| Archive | `/archives/` | 跨三个分区的文章时间线 |
 
-首页采用 Blowfish 的 `homepage.layout = "page"`，显示介绍、三个分区入口、最近 5 篇及 All writing 入口；不设置背景大图。以 `github` 配色为基础，自定义米白底色、克制的绿色强调和细分隔线；默认浅色并支持系统外观与手动切换。西文正文使用本地托管的 Inter Latin woff2，附带字体许可证；中文回退到苹方、微软雅黑等系统字体，不下载完整中文字体包。
+首页采用 Blowfish 的 `homepage.layout = "page"`，显示介绍、三个分区入口、最近 5 篇及 All writing 入口；不设置背景大图。以 `github` 配色为基础，自定义米白底色、克制的绿色强调和细分隔线；默认浅色并支持系统外观与手动切换。正文现采用系统无衬线字体，中文回退到苹方、微软雅黑等系统字体；页面不请求 Inter 或完整中文字体包。标签使用拜占庭紫 `#702963`，深色外观用较亮的 `#d79acb`。
+
+主导航为 **Posts · Archive · Gallery · Tags · 外观切换 · 搜索**；Gallery 指向 `/travel/`，读书笔记仍可从首页、Archive 和标签进入。参照 [Lilian Weng 的文章](https://lilianweng.github.io/posts/2026-07-04-harness/) 实测比例：正文 16px / 1.6、桌面标题 36px、文章单列最大 720px、导航高 60px。日期与字数一行桌面 14px、手机 12px。`layouts/single.html` 与 `partials/toc.html` 将目录置于正文上方，用原生 `details` 默认收起；摘要标题居中，展开后的层级列表左对齐。文章阅读栏整体居中，正文按正常左对齐排版。
 
 保留站内搜索、代码复制、RSS、标签和系列；不用 categories、访问计数或点赞服务。数学在构建时生成 MathML。页面仍可有搜索、菜单、外观切换等 JavaScript，“零 JS 数学”不表示全站完全无 JavaScript。
 
@@ -128,7 +130,9 @@ cascade:
 ---
 ```
 
-Travel 的分区页设置 `cardView: true`，传给文章的设置为 `showHero: true`、`hideFeatureImage: false`、`showTableOfContents: false`。文章自己的参数优先于 cascade，可以单独调整。
+Travel 的分区页设置 `cardView: true`，传给文章的设置包含 `hideFeatureImage: false`、`showTableOfContents: false`。文章自己的参数优先于 cascade。当前自定义单页模板不再显示占据正文空间的 Hero；`showHero` 和 `heroStyle` 为迁移保留值，不控制新背景。
+
+`layouts/partials/article-background.html` 从本地 `featureimage` 参数或 bundle 中的 `*feature*`、`*cover*`、`*thumbnail*` 自动选择静态位图，生成最大 1920px WebP 和 640/1024px 候选。图片保持比例完整显示在正文后方，不占文流空间，浅色不透明度 12%、深色 10%，下方渐隐。无封面的文章不输出背景。SVG/GIF 不用作这一装饰背景。
 
 ## 4. 数学、图片、画廊与搜索
 
@@ -153,7 +157,7 @@ Travel 的分区页设置 `cardView: true`，传给文章的设置为 `showHero:
 
 ### 4.2 图片与布局稳定性
 
-文章采用 Page Bundle：`index.md` 与它的图片放在同一个目录。正文写普通 Markdown，例如 `![Meaningful description](photo.jpg "Optional caption")`。普通位图以 **1280px** 为正文主图最大宽度、质量 **82** 输出 WebP，并在适用时生成 **480 / 800 / 1280px** 候选；小图不放大。HTML 的 srcset 描述符使用真实尺寸，明确输出 `width`、`height`，让浏览器预留图片空间。移动端 sizes 预留左右 48px，宽屏正文按 680px 选择资源。
+文章采用 Page Bundle：`index.md` 与它的图片放在同一个目录。正文写普通 Markdown，例如 `![Meaningful description](photo.jpg "Optional caption")`。普通位图以 **1280px** 为正文主图最大宽度、质量 **82** 输出 WebP，并在适用时生成 **480 / 800 / 1280px** 候选；小图不放大。HTML 的 srcset 描述符使用真实尺寸，明确输出 `width`、`height`，让浏览器预留图片空间。移动端 sizes 预留左右 48px，宽屏正文按 720px 选择资源。
 
 不能把 GIF 当作普通照片压缩，否则会丢失动画；模板将 GIF 排除在位图缩放之外。SVG 使用独立分支：从数字 `viewBox` 提取宽高，不调用 SVG 不支持的 `.Width` / `.Height`；没有受支持 viewBox 时明确报错。写作时为 SVG 保留如 `viewBox="0 0 800 600"` 的尺寸定义。本文不把所有 SVG 语法或所有动画格式都列为已验证的兼容范围。
 
@@ -192,7 +196,7 @@ RSS 位于 `/index.xml`，站点地图 `/sitemap.xml`，爬虫规则 `/robots.tx
 
 旧仓库本地副本保存在相邻目录 `../junwen-log-legacy`。新站只迁移需要的 Markdown 与引用资源，不把旧 `public/` 全量带进源码。详细逐项记录见 [MIGRATION.md](MIGRATION.md)。
 
-迁移保留 **5 篇已发布文章、1 篇原有草稿**；另外新增一篇英文站点介绍。技术文章归入 posts，考研回顾归入 notes，唐尧故园摄影归入 travel；没有把个人回顾虚构成书评，也没有生成虚构旅行经历。
+首次迁移保留 **5 篇已发布文章、1 篇原有草稿**；另外新增一篇英文站点介绍。后续按用户要求删除了《实验室主机连接手册》和 8 张附图，当前为 **4 篇旧文章 + 1 篇英文介绍 + 1 篇草稿**。该页的新旧 URL 均不再发布，文件可从 Git 历史恢复。技术文章归入 posts，考研回顾归入 notes，唐尧故园摄影归入 travel；没有把个人回顾虚构成书评，也没有生成虚构旅行经历。
 
 旧的 5 个正式文章地址从旧 sitemap 或生成 HTML 的 canonical 核实后写入 aliases。GitHub Pages 将提供 Hugo 生成的跳转 HTML，导向新日期路径。旧预览产物中的 localhost 地址不作为正式 URL 迁移，也不作为擅自发布草稿的依据。
 
@@ -351,7 +355,7 @@ git push origin main
 
 ## 10. 验收记录与未决事项
 
-以下为 2026-09-16 实际完成的本地及线上验收。首次上线提交为 `d054d61`，通过 `./scripts/blog publish` 执行推送、等待构建和部署。
+以下表格保留 2026-09-16 首次上线的本地及线上验收记录。首次上线提交为 `d054d61`，通过 `./scripts/blog publish` 执行推送、等待构建和部署。后续展示修订见 [CHANGES-2026-09-16.md](CHANGES-2026-09-16.md) 与 [VALIDATION.md](VALIDATION.md)：删除实验室指南后，当前生产检查为 52 个 HTML 页面、2 个 MathML 表达式、1 个图库页；正式文章现为 5 篇。新版已在桌面与 390px 手机尺寸核对排版、默认收起目录、导航和深浅外观背景。
 
 | 验收项 | 当前证据或状态 |
 | --- | --- |

@@ -53,6 +53,10 @@ cd /Users/junwenyang/Developer/Projects/junwen-log
 
 ## 4. 文章、目录和图片
 
+**封面背景：** 把静态照片命名为 `feature.jpg`（也可用 PNG/WebP）放在文章 bundle，或在 front matter 写 `featureimage: cover.jpg`，即可作为按原比例显示的淡化背景。没有封面的文章保持纯色底；背景不占正文空间。透明度在 `assets/css/custom.css` 的 `.article-backdrop img` 中调整。
+
+**文章目录：** 技术文章的目录默认在正文上方收起，点击 **Table of Contents** 展开。目录由 Markdown 标题自动生成，不必再手写。需要单篇控制时写 `showTableOfContents: true` 或 `false`。
+
 三个分区都是 Hugo page bundle：一篇文章占一个文件夹，正文是 `index.md`，图片就在旁边。
 
 ```text

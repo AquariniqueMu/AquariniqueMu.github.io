@@ -7,6 +7,7 @@ A personal notebook on **technology, books, and places**, built with Hugo and Bl
 - [Writing guide / 写作指南](docs/WRITING.md)
 - [Implementation guide / 完整实施文档](docs/IMPLEMENTATION.md)
 - [Legacy migration record](docs/MIGRATION.md)
+- [Typography and navigation update](docs/CHANGES-2026-09-16.md)
 
 ## Stack
 
@@ -21,7 +22,7 @@ A personal notebook on **technology, books, and places**, built with Hugo and Bl
 | Publishing | GitHub Actions → GitHub Pages |
 | Writing | Obsidian content vault, optional MWeb, macOS launchers and a Python CLI |
 
-The source includes five previously published articles, their local images, one preserved draft, and a new English introduction. Historical Chinese titles and publication dates are retained. Old article URLs have aliases to their new canonical URLs. Five historical downloadable attachments were already missing; their exact names and recovery instructions are recorded in [MIGRATION.md](docs/MIGRATION.md).
+The source includes four previously published articles, their local images, one preserved draft, and a new English introduction. Historical Chinese titles and publication dates are retained. Retained old article URLs have aliases to their new canonical URLs. The lab-server guide was removed at the author's request. Five historical downloadable attachments were already missing; their exact names and recovery instructions are recorded in [MIGRATION.md](docs/MIGRATION.md).
 
 ## Local setup
 

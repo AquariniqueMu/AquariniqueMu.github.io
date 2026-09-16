@@ -16,30 +16,6 @@ aliases:
 
 # README: WSL2 + Ubuntu 22.04 + GPU + Docker + Proxy + Conda
 
-## 目录 / Table of Contents
-
-1. [简介 / Introduction](#简介--introduction)  
-2. [安装并配置 WSL2 (Ubuntu 22.04) / Installing & Configuring WSL2 (Ubuntu 22.04)](#安装并配置-wsl2-ubuntu-2204--installing--configuring-wsl2-ubuntu-2204)  
-3. [启用 GPU 支持 / Enabling GPU Support](#启用-gpu-支持--enabling-gpu-support)  
-4. [代理设置 / Proxy Configuration](#代理设置--proxy-configuration)  
-   1. [WSL 全局代理 / System-wide Proxy in WSL](#wsl-全局代理--system-wide-proxy-in-wsl)  
-   2. [Docker 代理 / Docker Proxy](#docker-代理--docker-proxy)  
-     - [Docker `daemon.json` “default” 字段与其他写法 / About “default” vs “http-proxy” in `daemon.json`](#docker-daemonjson-default-字段与其他写法--about-default-vs-http-proxy-in-daemonjson)  
-   3. [常见网络或 GPG Key 出错场景排查 / Common Network or GPG Key Errors](#常见网络或-gpg-key-出错场景排查--common-network-or-gpg-key-errors)  
-5. [安装 Docker / Installing Docker](#安装-docker--installing-docker)  
-   1. [官方仓库安装 / Official Repo Installation](#官方仓库安装--official-repo-installation)  
-   2. [手动安装（离线或无法连接官方源） / Manual Installation (Offline or Repo Issues)](#手动安装离线或无法连接官方源--manual-installation-offline-or-repo-issues)  
-6. [安装 Anaconda 并配置国内源 / Installing Anaconda & Configuring Mirrors](#安装-anaconda-并配置国内源--installing-anaconda--configuring-mirrors)  
-   1. [Conda 国内源配置 / Conda Domestic Mirrors](#conda-国内源配置--conda-domestic-mirrors)  
-   2. [Pip 国内源配置 / Pip Domestic Mirrors](#pip-国内源配置--pip-domestic-mirrors)  
-   3. [Conda 与 Pip 源的区别 / Distinction between Conda and Pip Mirrors](#conda-与-pip-源的区别--distinction-between-conda-and-pip-mirrors)  
-7. [创建大模型相关虚拟环境 / Creating LLM Virtual Environment](#创建大模型相关虚拟环境--creating-llm-virtual-environment)  
-8. [可选：安装 CUDA & cuDNN / (Optional) Installing CUDA & cuDNN](#可选安装-cuda--cudnn--optional-installing-cuda--cudnn)  
-9. [常见问题 / FAQ](#常见问题--faq)  
-10. [总结 / Conclusion](#总结--conclusion)
-
----
-
 ## 简介 / Introduction
 
 - **目标 / Goal**  

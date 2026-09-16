@@ -1,0 +1,3 @@
+{{- $title := . -}}
+{{- if reflect.IsMap . -}}{{- $title = .linkTitle -}}{{- end -}}
+<span class="notebook-badge">{{ $title }}</span>

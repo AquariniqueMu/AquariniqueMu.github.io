@@ -1,22 +1,22 @@
 [[main]]
-  name = "Technology"
+  name = "Posts"
   pageRef = "posts"
   weight = 10
 [[main]]
-  name = "Reading"
-  pageRef = "notes"
+  name = "Archive"
+  pageRef = "archives"
   weight = 20
 [[main]]
-  name = "Travel"
+  name = "Gallery"
   pageRef = "travel"
   weight = 30
 [[main]]
-  name = "About"
-  pageRef = "about"
+  name = "Tags"
+  pageRef = "tags"
   weight = 40
 [[footer]]
-  name = "All writing"
-  pageRef = "archives"
+  name = "About"
+  pageRef = "about"
   weight = 10
 [[footer]]
   name = "Tags"

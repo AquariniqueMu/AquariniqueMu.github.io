@@ -21,7 +21,7 @@
     {{- $set = $set | append (printf "%s %dw" $src $w) -}}
   {{- end -}}
   <figure class="note-figure">
-    <img src="{{ $src }}"{{ with $set }} srcset="{{ delimit . ", " }}" sizes="(max-width: 720px) calc(100vw - 48px), 680px"{{ end }} width="{{ $w }}" height="{{ $h }}" alt="{{ .Text | plainify }}" loading="lazy" decoding="async">
+    <img src="{{ $src }}"{{ with $set }} srcset="{{ delimit . ", " }}" sizes="(max-width: 768px) calc(100vw - 48px), 720px"{{ end }} width="{{ $w }}" height="{{ $h }}" alt="{{ .Text | plainify }}" loading="lazy" decoding="async">
     {{- with .Title }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
   </figure>
 {{- end -}}

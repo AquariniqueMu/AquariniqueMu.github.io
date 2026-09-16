@@ -1,0 +1,6 @@
+<a class="notebook-term not-prose inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors" href="{{ .Page.RelPermalink }}">
+  {{ .Page.Title }}
+  {{ if site.Params.taxonomy.showTermCount | default true }}
+    <span class="text-xs">{{ .Count }}</span>
+  {{ end }}
+</a>

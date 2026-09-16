@@ -1,0 +1,24 @@
+{{- if .IsPage -}}
+  {{- $image := false -}}
+  {{- with partial "functions/feature-image.html" . -}}
+    {{- $image = or ($.Resources.Get .) (resources.Get .) -}}
+  {{- end -}}
+  {{- if not $image -}}
+    {{- range slice "*feature*" "*cover*" "*thumbnail*" -}}
+      {{- if not $image -}}{{- $image = $.Resources.GetMatch . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $image -}}
+    {{- if and (eq .ResourceType "image") (not (in (slice "svg" "gif") .MediaType.SubType)) -}}
+      {{- $full := .Resize (printf "%dx webp q80" (int (math.Min 1920 .Width))) -}}
+      {{- $set := slice -}}
+      {{- range slice 640 1024 -}}
+        {{- if lt . $full.Width -}}{{- $v := $image.Resize (printf "%dx webp q80" .) -}}{{- $set = $set | append (printf "%s %dw" $v.RelPermalink $v.Width) -}}{{- end -}}
+      {{- end -}}
+      {{- $set = $set | append (printf "%s %dw" $full.RelPermalink $full.Width) -}}
+      <div class="article-backdrop" aria-hidden="true">
+        <img src="{{ $full.RelPermalink }}" srcset="{{ delimit $set ", " }}" sizes="100vw" width="{{ $full.Width }}" height="{{ $full.Height }}" alt="" role="presentation" fetchpriority="high" decoding="async">
+      </div>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
